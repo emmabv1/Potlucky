@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { NavLink, Redirect } from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 
 class Login extends Component {
   state = {
@@ -8,16 +8,9 @@ class Login extends Component {
     tohome: false
   };
 
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
   handleFormSubmit = event => {
     event.preventDefault();
-    this.setState({ username: "", password: "", tohome: true});
+    this.setState({tohome: true});
   };
 
   render() {
