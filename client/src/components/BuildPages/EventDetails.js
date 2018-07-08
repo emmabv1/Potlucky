@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Redirect} from "react-router-dom";
 
-class EventDetails extends Component {
+/* class EventDetails extends Component {
     state = {
       toinvites: false
     };
@@ -40,6 +40,150 @@ class EventDetails extends Component {
           </div>
       );
     }
-  }
+  } 
+  */
+
+
+
+
+
+
+
+  const Instructions = () => {
+    return (
+      <div className="box">
+        <h1>Instructions</h1>
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetu</p>
+      </div>
+    );
+  };
   
+  const FoodContainer = (props) => {
+    return (
+      <div className="box light-bg">
+        <h3>Add an Item To Your Party!</h3>
+        {props.items.map(u => {
+          return <FoodCard
+                   item={u}
+                   handleClick={props.addAsItem}/>
+        })}
+      </div>
+    );
+  };
+  
+  const PartyContainer = (props) => {
+    return (
+      <div className="box light-bg">
+        <h3>Your Party Items!!</h3>
+        {props.partyItems.map(u => {
+            return <FoodCard
+                     item={u}
+                     handleClick={props.removeAsItem}
+                     PM={true}
+                     plusServing={props.plusServing}
+                     minusServing={props.minusServing}/>
+        })}
+      </div>
+    );
+  };
+  
+  const FoodCard = (props) => {
+    return (
+      <div className="box"
+        key={props.item.id}>
+       <div className="content">
+          <ul>
+            <li onClick={() => props.handleClick(props.item.id)}>{props.item.name}</li>
+          {props.PM 
+              ? (<li>servings: {props.item.servings} 
+                <PlusMinus minusServing={props.minusServing} MinusProp={props.item.id} plusServing={props.plusServing} PlusProp={props.item.id}/></li>)
+              : null}
+          </ul>
+        </div>
+      </div>
+    )
+  };
+  
+const PlusMinus = (props) => {
+  return (
+  <div>
+  <button className="plus" onClick={() => props.plusServing(props.PlusProp)}>+</button><button className="minus" onClick={() => props.minusServing(props.MinusProp)}>-</button>
+  </div>
+    )
+};
+
+  class EventDetails extends React.Component{
+    constructor(props) {
+      super(props);
+      this.state = {
+        items: [
+          {id: 1, name: 'Salad', servings: 2},
+          {id: 2, name: 'Entrees', servings: 2},
+          {id: 3, name: 'Drinks', servings: 2},
+          {id: 4, name: 'Desserts', servings: 2},
+          {id: 5, name: 'Disposables', servings: 2},
+          {id: 6, name: 'Miscellaneous', servings: 2}
+        ],
+        partyItems: [2]
+      };
+      
+      this.hydrateUser = this.hydrateUser.bind(this);
+      this.addAsItem = this.addAsItem.bind(this);
+      this.removeAsItem = this.removeAsItem.bind(this);
+      this.plusServing = this.plusServing.bind(this);
+      this.minusServing = this.minusServing.bind(this);
+    }
+    
+    hydrateUser(userId) {
+      return this.state.items.find(u => u.id === userId);
+    }
+    
+    addAsItem(userId) {
+      this.setState((prevState, props) => {
+        let partyItems = new Set([...prevState.partyItems, userId]);
+        return {partyItems: [...partyItems]};
+      });
+    }
+    
+    removeAsItem(userId) {
+      this.setState((prevState, props) => {
+        let partyItems = this.state.partyItems.filter(id => id !== userId);
+        return {partyItems};
+      });
+    }
+    
+     plusServing(userId) {
+        let copy = this.state.items
+        let index = copy.findIndex( element => element.id === userId);
+        copy[index].servings++;
+        this.setState({items:copy});
+     }
+    
+     minusServing(userId) {
+        let copy = this.state.items
+        let index = copy.findIndex( element => element.id === userId);
+        copy[index].servings--;
+        this.setState({items:copy});
+     }
+    
+    render() {
+      return (
+        <div>
+          <Instructions />
+          <FoodContainer
+            items={this.state.items}
+            addAsItem= {this.addAsItem}/>
+          <PartyContainer 
+            partyItems={this.state.partyItems.map(this.hydrateUser)}
+            removeAsItem={this.removeAsItem}
+            plusServing = {this.plusServing}
+            minusServing = {this.minusServing}>
+            <div>123</div>
+          </PartyContainer>
+        </div>
+      );
+    }
+  }
+
+
   export default EventDetails;
