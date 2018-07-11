@@ -13,6 +13,15 @@ class Login extends Component {
     this.setState({tohome: true});
   };
 
+  
+
+ handleFacebookBtn = event =>{
+  event.preventDefault();
+  document.location.replace("/login/facebook")
+ };
+
+ 
+
   render() {
       if (this.state.tohome === true) {
         return <Redirect to='/home' />
@@ -40,7 +49,7 @@ class Login extends Component {
                     />
                     <button onClick={this.handleFormSubmit}>Submit</button>
 
-                    <button>Facebook Login</button>
+                    <button onClick={this.handleFacebookBtn}>Facebook Login</button>
 
                     <button>Meetup Login</button>
 

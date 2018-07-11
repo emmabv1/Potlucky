@@ -24,10 +24,16 @@
   "homepage": "https://github.com/emmabv1/Potlucky#readme",
   "dependencies": {
     "concurrently": "^3.6.0",
+    "connect-ensure-login": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.6.1",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "morgan": "^1.9.0",
     "nodemon": "^1.18.0",
     "npm": "^6.1.0",
     "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0",
     "path": "^0.12.7"
   }
