@@ -1,5 +1,15 @@
 import React, {Component} from "react";
 import {Redirect} from "react-router-dom";
+import "./test.css";
+
+let foodList = [
+  {id: 1, name: 'Salad', servings: 2},
+  {id: 2, name: 'Entrees', servings: 2},
+  {id: 3, name: 'Drinks', servings: 2},
+  {id: 4, name: 'Desserts', servings: 2},
+  {id: 5, name: 'Disposables', servings: 2},  
+  {id: 6, name: 'Miscellaneous', servings: 2}
+];
 
 /* class EventDetails extends Component {
     state = {
@@ -67,6 +77,13 @@ import {Redirect} from "react-router-dom";
                    item={u}
                    handleClick={props.addAsItem}/>
         })}
+        <form className="box content" id="create-course-form" onSubmit={props.handleSubmit}>
+          <label>
+          New Item:
+            <input type="text"/>
+          </label>
+          <input type="submit" value="Add" />
+        </form>
       </div>
     );
   };
@@ -116,14 +133,7 @@ const PlusMinus = (props) => {
     constructor(props) {
       super(props);
       this.state = {
-        items: [
-          {id: 1, name: 'Salad', servings: 2},
-          {id: 2, name: 'Entrees', servings: 2},
-          {id: 3, name: 'Drinks', servings: 2},
-          {id: 4, name: 'Desserts', servings: 2},
-          {id: 5, name: 'Disposables', servings: 2},
-          {id: 6, name: 'Miscellaneous', servings: 2}
-        ],
+        items: foodList,
         partyItems: [2]
       };
       
@@ -133,7 +143,8 @@ const PlusMinus = (props) => {
       this.plusServing = this.plusServing.bind(this);
       this.minusServing = this.minusServing.bind(this);
     }
-    
+  
+
     hydrateUser(userId) {
       return this.state.items.find(u => u.id === userId);
     }
@@ -165,6 +176,17 @@ const PlusMinus = (props) => {
         copy[index].servings--;
         this.setState({items:copy});
      }
+
+     handleSubmit = event => {
+      event.preventDefault();
+      const prevState = this.state.items;
+      console.log(event.target[0].value);
+      prevState.push({id: foodList.length+1,
+                      name: event.target[0].value,
+                      servings: 2});
+      this.setState({ items: prevState});
+      document.getElementById("create-course-form").reset();
+    }
     
     render() {
       return (
@@ -172,7 +194,8 @@ const PlusMinus = (props) => {
           <Instructions />
           <FoodContainer
             items={this.state.items}
-            addAsItem= {this.addAsItem}/>
+            addAsItem= {this.addAsItem}
+            handleSubmit= {this.handleSubmit}/>
           <PartyContainer 
             partyItems={this.state.partyItems.map(this.hydrateUser)}
             removeAsItem={this.removeAsItem}
@@ -180,6 +203,7 @@ const PlusMinus = (props) => {
             minusServing = {this.minusServing}>
             <div>123</div>
           </PartyContainer>
+          <button>Submit</button>
         </div>
       );
     }
