@@ -159,7 +159,5 @@ app.get('/auth/google/callback',
     res.redirect('/');
   });
 
-
-
 console.log("APP STARTED");
 app.listen(PORT)
