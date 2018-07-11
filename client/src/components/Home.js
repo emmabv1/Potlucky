@@ -6,8 +6,8 @@ const Home = () => {
         <div>
             <p>Welcome (name) to Potlucky</p>
             <div>
-            <div><NavLink to="/events">Upcoming Events</NavLink></div>
-            <div><NavLink to="/newevent">Create Event</NavLink></div>
+            <section className="events"><NavLink to="/events">Upcoming Events</NavLink></section>
+            <section className="create"><NavLink to="/newevent">Create Event</NavLink></section>
             </div>
         </div>
     );

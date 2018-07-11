@@ -32,3 +32,5 @@ const GoogleCreds = {
             })
         })
     }))
+
+    module.exports = passport;
