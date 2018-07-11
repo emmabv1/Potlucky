@@ -20,6 +20,12 @@ class Login extends Component {
   document.location.replace("/login/facebook")
  };
 
+ handleGoogleBtn = event =>{
+  event.preventDefault();
+  document.location.replace("/auth/google")
+ }; 
+ 
+
  
 
   render() {
@@ -50,6 +56,8 @@ class Login extends Component {
                     <button onClick={this.handleFormSubmit}>Submit</button>
 
                     <button onClick={this.handleFacebookBtn}>Facebook Login</button>
+
+                    <button onClick={this.handleGoogleBtn}>GoogleLogin</button>
 
                     <button>Meetup Login</button>
 
