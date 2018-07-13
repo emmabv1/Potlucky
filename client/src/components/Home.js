@@ -1,4 +1,5 @@
 import React from "react";
+import {NavLink, Redirect} from "react-router-dom";
 import "./login.css";
 
 const Home = () => {
@@ -6,7 +7,7 @@ const Home = () => {
         <div>
             <p>Welcome (name) to Potlucky</p>
             <div>
-            <a href="/events"><button className="events">Upcoming Events</button></a>
+            <NavLink to="/events"><button className="events">Upcoming Events</button></NavLink>
             <a href="/newevent"><button className="create">Create Event</button></a>
             </div>
         </div>
