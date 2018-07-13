@@ -1,22 +1,73 @@
-.collapsible {
-    background-color: #777;
-    color: white;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
+@import url('https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Muli|Ubuntu');
+
+.photo {
+    background-color: rgb(180,91,35);
+    border-radius: 50%;
 }
 
-.active, .collapsible:hover {
+.title {
+    padding: 3%;
+}
+.options {
+    margin: 1%;
+}
+
+
+
+.info {
+    background-color: rgb(215,164,97);
+    color: white;
+    padding: 1%;
+    width: 70%;
+    margin: auto;
+    border-radius: 8px;
+    font-family: 'Muli', sans-serif;
+    font-size: 18px;
+}
+
+.collapsible {
+    background: linear-gradient( rgb(177,79,197), rgb(147,39,143));
+    color: white;
+    cursor: pointer;
+    padding: 5%;
+    width: 100%;
+    border-style: none;
+    margin-top: 1%;
+    text-align: left;
+    font-family: 'Muli', sans-serif;
+    font-size: 18px;
+}
+
+
+.submit {
+    background-color: rgb(215,164,97);
+    color: white;
+    cursor: pointer;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    padding: 2%;
+    border-radius: 8px;
+    border-style: none;
+    font-family: 'Muli', sans-serif;
+    font-size: 18px;
+    float: right;
+}
+
+.collapsible:hover {
     background-color: #555;
 }
 
+.list {
+    font-family: 'Muli', sans-serif;
+    text-align: left;
+    font-size: 15px;
+}
+
 .content {
-    padding: 0 18px;
+    padding: 10px;
    /* display: none;*/
     overflow: hidden;
-    background-color: #f1f1f1;
+    background-color: rgb(229,212,211);
 }

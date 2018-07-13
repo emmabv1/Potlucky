@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css?family=Muli|Ubuntu');
+
+#logo {
+    padding: 8%;
+    width: 300px;
+  }
+
+.forms {
+    margin: 5%;
+}
+
+.login {
+    background-color: rgb(215,164,97);
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    width: 60%;
+    margin: 2%;
+    padding: 2%;
+    border-radius: 8px;
+    border-style: none;
+    font-family: 'Muli', sans-serif;
+    font-size: 18px;
+}
+
+#facebook {
+    background: rgb(59,89,152);
+}
+
+#google {
+    background: rgb(219,68,55);
+}
+
+#meetup {
+    background: rgb(237,28,64);
+}
+
+.events {
+    font-size: 30px;
+    background:  rgb(147,39,143);
+    border: none;
+    width: 90%;
+    height: 300px;
+    margin: 5%;
+    border-radius: 8px;
+}
+
+.create {
+    font-size: 30px;
+    background:  rgb(147,39,143);
+    border: none;
+    width: 90%;
+    height: 300px;
+    margin: 5%;
+    border-radius: 8px;
+}

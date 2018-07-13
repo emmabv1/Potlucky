@@ -16,6 +16,8 @@ import Error from "./components/Error";
 class App extends Component {
   render() {
     return (
+      <div>
+      <a href="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></a>
       <BrowserRouter>
         <div className="App">
           <Switch>
@@ -32,6 +34,7 @@ class App extends Component {
           </Switch>
         </div>
       </BrowserRouter>
+      </div>
     );
   }
 }

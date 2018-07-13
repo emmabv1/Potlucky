@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {NavLink, Redirect} from "react-router-dom";
+import "./login.css";
 
 class Login extends Component {
   state = {
@@ -13,57 +14,51 @@ class Login extends Component {
     this.setState({tohome: true});
   };
 
-  
+  handleFacebookBtn = event =>{
+    event.preventDefault();
+    document.location.replace("/login/facebook")
+  };
 
- handleFacebookBtn = event =>{
-  event.preventDefault();
-  document.location.replace("/login/facebook")
- };
-
- handleGoogleBtn = event =>{
-  event.preventDefault();
-  document.location.replace("/auth/google")
- }; 
+  handleGoogleBtn = event =>{
+    event.preventDefault();
+    document.location.replace("/auth/google")
+  }; 
  
-
- 
-
   render() {
       if (this.state.tohome === true) {
         return <Redirect to='/home' />
       }
     return (
-        <div>
-            <h1> Potlucky! </h1>
-            <img id="logo" src= "https://vignette.wikia.nocookie.net/clubpenguin/images/a/a9/Pot_O%27_Gold_clothing_icon_ID_324.png/revision/latest?cb=20130104002816"/>
-                <form>
-                    <p>Username: {this.state.username}</p>
-                    <p>Password: {this.state.password}</p>
-                    <input
-                    type="text"
-                    placeholder="Username"
-                    name="username"
-                    value={this.state.username}
-                    onChange={this.handleInputChange}
-                    />
-                    <input
-                    type="password"
-                    placeholder="Password"
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.handleInputChange}
-                    />
-                    <button onClick={this.handleFormSubmit}>Submit</button>
+      <div>
+        <img id="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/>
+        <form class="forms">
+          <p>Username: {this.state.username}</p>
+          <input
+          type="text"
+          placeholder=""
+          name="username"
+          value={this.state.username}
+          onChange={this.handleInputChange}
+          />
+          <p>Password: {this.state.password}</p>
+          <input
+          type="password"
+          placeholder=""
+          name="password"
+          value={this.state.password}
+          onChange={this.handleInputChange}
+          />
+          <button class="login" onClick={this.handleFormSubmit}>Submit</button>
+          <p><NavLink to="">Create Account</NavLink></p>
+        </form>
+        
 
-                    <button onClick={this.handleFacebookBtn}>Facebook Login</button>
-
-                    <button onClick={this.handleGoogleBtn}>GoogleLogin</button>
-
-                    <button>Meetup Login</button>
-
-                    <NavLink to="">Create Account</NavLink>
-                </form>
+        <div class="otherlogins">
+          <button class="login" id="facebook" onClick={this.handleFacebookBtn}>Facebook Login</button>
+          <button class="login" id="google" onClick={this.handleGoogleBtn}>Google Login</button>
+          <button class="login" id="meetup">Meetup Login</button>
         </div>
+      </div>
     );
   }
 }
