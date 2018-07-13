@@ -1,5 +1,21 @@
-/*.App {
+.App {
   text-align: center;
-  background-color: aquamarine;
-}*/
+  background-color: white;
+  margin: 2%;
+  border-radius: 5px;
+  height: 100%;
+  font-family: 'Sorts Mill Goudy', serif;
+}
+
+.logo {
+  position: absolute;
+  width: 70px;
+  top: 15px;
+  right: 15px;
+}
+
+#logo {
+  padding: 8%;
+  width: 300px;
+}
 

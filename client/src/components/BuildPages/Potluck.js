@@ -55,12 +55,14 @@ const food = [
 class EventInfo extends Component {
   render(){
     return (
-    <div>
-      <img src={partyinfo.image} style={{height: 100}}/>
+    <div className="title">
+      <img className="photo" src={partyinfo.image} style={{height: 100}}/>
       <h1>{partyinfo.name}</h1>
-      <h2>{partyinfo.location}</h2>
-      <h2>{partyinfo.date} at {partyinfo.time}</h2>
-      <h3>Guest count: {partyinfo.guests.length}</h3>
+      <div className="info">
+        <p>{partyinfo.location}</p>
+        <p>{partyinfo.date} at {partyinfo.time}</p>
+        <p>Guest count: {partyinfo.guests.length}</p>
+      </div>
     </div>
     )
   }
@@ -86,8 +88,8 @@ class Category extends Component {
   render () {
     return(
       <div>
-        <button class="collapsible" onClick={this.expand}>{this.state.cat}</button>
-        <div class="content" style={this.state.display}>
+        <button className="collapsible" onClick={this.expand}>{this.state.cat}</button>
+        <div className="content" style={this.state.display}>
 
 
           {this.state.items.filter(j => j.category === this.state.cat).map((i) => (
@@ -125,7 +127,7 @@ class Category extends Component {
 class Item extends Component {
   render() {
     return (
-      <div>
+      <div className="list">
         <ul><li>{this.props.item} ({this.props.guest})</li></ul>
       </div>
     )
@@ -155,16 +157,18 @@ class Potluck extends Component {
 
               <h2>What are you bringing to the party?</h2>
 
+              <div className="options">
+
               {this.state.partyinfo.categories.map((i) => (
                 <Category
                 category={i}/>
               ))}
 
-              
+              </div>
               
 
               <form>
-                  <button onClick={this.handleFormSubmit}>Done</button>
+                  <button className="submit" onClick={this.handleFormSubmit}>Done</button>
               </form>
           </div>
       );
