@@ -8,7 +8,7 @@ const Home = () => {
             <p>Welcome (name) to Potlucky</p>
             <div>
             <NavLink to="/events"><button className="events">Upcoming Events</button></NavLink>
-            <a href="/newevent"><button className="create">Create Event</button></a>
+            <NavLink to="/newevent"><button className="create">Create Event</button></NavLink>
             </div>
         </div>
     );
