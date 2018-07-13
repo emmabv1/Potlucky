@@ -40,10 +40,10 @@ const parties = [
 class Event extends Component {
     render() {
         return (
-        <a href="/potluck/:id"><button class="collapsible">
+        <NavLink to="/potluck/:id"><button class="collapsible">
             <p>{this.props.name} </p>
             <p>{this.props.date}</p>
-        </button></a>
+        </button></NavLink>
         );
     }   
 }
