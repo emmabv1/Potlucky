@@ -17,9 +17,11 @@ class App extends Component {
   render() {
     return (
       <div>
-      <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
+      
       <BrowserRouter>
+      
         <div className="App">
+        <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
           <Switch>
             <Route path="/" component={Login} exact />
             <Route path="/home" component={Home} />
