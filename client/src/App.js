@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <div>
       
-      <HashRouter basename="/">
+      <HashRouter basename= "/">
       
         <div className="App">
         
