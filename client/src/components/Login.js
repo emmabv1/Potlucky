@@ -29,7 +29,7 @@ class Login extends Component {
         return <Redirect to='/home' />
       }
     return (
-      <div>
+      <div className="container">
         <img id="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/>
         <form class="forms">
           <p>Username: {this.state.username}</p>
@@ -48,7 +48,7 @@ class Login extends Component {
           value={this.state.password}
           onChange={this.handleInputChange}
           />
-          <button class="login" onClick={this.handleFormSubmit}>Submit</button>
+          <button class="submit" onClick={this.handleFormSubmit}>Submit</button>
           <p><NavLink to="">Create Account</NavLink></p>
         </form>
         

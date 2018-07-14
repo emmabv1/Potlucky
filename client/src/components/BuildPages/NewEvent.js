@@ -16,8 +16,10 @@ class NewEvent extends Component {
           return <Redirect to='/details/:id'/>
         }
       return (
-          <div>
-              <h1>Create a new Potluck</h1>
+          <div className="container">
+            <div class="title">
+              <h2>Create a new Potluck</h2>
+            </div>
                   <form>
                       <p>Party Name</p>
                       <input
@@ -61,7 +63,7 @@ class NewEvent extends Component {
                       name="location"
                       />
 
-                      <button onClick={this.handleFormSubmit}>Submit</button>
+                      <button class="submit" onClick={this.handleFormSubmit}>Submit</button>
                   </form>
           </div>
       );

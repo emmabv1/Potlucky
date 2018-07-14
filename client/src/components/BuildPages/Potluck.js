@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import {Redirect} from "react-router-dom";
 import "./potluck.css";
 
-
 const partyinfo = {
   image: "https://upload.wikimedia.org/wikipedia/commons/6/6c/Popcorn_Time_logo.png",
   name: "Movie Night",
@@ -56,7 +55,7 @@ class EventInfo extends Component {
   render(){
     return (
     <div className="title">
-      <img className="photo" src={partyinfo.image} style={{height: 100}}/>
+      <img className="photo" src={partyinfo.image}/>
       <h1>{partyinfo.name}</h1>
       <div className="info">
         <p>{partyinfo.location}</p>
@@ -88,7 +87,7 @@ class Category extends Component {
   render () {
     return(
       <div>
-        <button className="collapsible" onClick={this.expand}>{this.state.cat}</button>
+        <div className="collapsible menu" onClick={this.expand}>{this.state.cat}</div>
         <div className="content" style={this.state.display}>
 
 
@@ -99,20 +98,13 @@ class Category extends Component {
             />
           ))}
             
-
-          {/*this.state.items.map((i) => (
-            <Item
-              item={i.item}
-              guest={i.guest}/>
-          ))*/}
-        
           <form>
             <input
             type="text"
             placeholder="New Item"
             name="newitem"
             />
-            <button>Add</button>
+            <button class="submit">Add</button>
           </form>
         </div>
                     
@@ -152,19 +144,19 @@ class Potluck extends Component {
           return <Redirect to='/events'/>
         }
       return (
-          <div>
+          <div className="container">
               <EventInfo/>
 
               <h2>What are you bringing to the party?</h2>
 
-              <div className="options">
+             
 
               {this.state.partyinfo.categories.map((i) => (
                 <Category
                 category={i}/>
               ))}
 
-              </div>
+             
               
 
               <form>

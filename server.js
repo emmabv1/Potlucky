@@ -3,9 +3,10 @@ const path = require("path");
 const passport = require("passport");
 
 const PORT = process.env.PORT || 8000;
+const app = express();
 var Strategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-
+var db = require("./models");
 
 // Configure the Facebook strategy for use by Passport.
 //
@@ -48,7 +49,7 @@ passport.deserializeUser(function(obj, cb) {
 
 
 // Create a new Express application.
-const app = express();
+
 
 
 app.use('/static', express.static(path.join(__dirname, 'client/build/static')));

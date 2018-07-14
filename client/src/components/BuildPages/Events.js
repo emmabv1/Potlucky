@@ -40,10 +40,13 @@ const parties = [
 class Event extends Component {
     render() {
         return (
-        <NavLink to="/potluck/:id"><button class="collapsible">
+        <NavLink to="/potluck/:id"><div class="menu">
+            <img className="photo" src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Popcorn_Time_logo.png" />
+            <div className="details">
             <p>{this.props.name} </p>
             <p>{this.props.date}</p>
-        </button></NavLink>
+            </div>
+        </div></NavLink>
         );
     }   
 }
@@ -69,12 +72,13 @@ class Events extends Component {
 
     render(){
       return (
-        <div>
-        <h2>Upcoming Potlucks</h2>
-
-        <button onClick={this.all}>All</button>
-        <button onClick={this.yours}>Yours</button>
-        <button onClick={this.theirs}>Theirs</button>
+        <div className="container">
+            <div className="title">
+                <h2>Upcoming Potlucks</h2>
+                <button class="submit" onClick={this.all}>All</button>
+                <button class="submit" onClick={this.yours}>Yours</button>
+                <button class="submit" onClick={this.theirs}>Theirs</button>
+            </div>
 
         {this.state.events.map((i) =>(
             <Event

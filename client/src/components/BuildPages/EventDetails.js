@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Redirect} from "react-router-dom";
-import "./test.css";
+import "./../../App.css";
 
 let foodList = [
   {id: 1, name: 'Salad', servings: 2},
@@ -25,44 +25,12 @@ let foodList = [
         if (this.state.toinvites === true) {
           return <Redirect to='/invites/:id'/>
         }
-      return (
-          <div>
-              <h2>What kind of stuff would you like your guests to bring?</h2>
-
-                <button>Salad</button> <span>x</span>
-                <button>Entrees</button> <span>x</span>
-                <button>Drinks</button> <span>x</span>
-                <button>Dessert</button> <span>x</span>
-                <button>Disposables</button> <span>x</span>
-                <button>Miscellaneous</button> <span>x</span>
-
-                  <form>
-                      <p>Add Category</p>
-                      <input
-                      type="text"
-                      placeholder="New Category"
-                      name="newcat"
-                      />
-                        <button>Add</button>
-
-                      <button onClick={this.handleFormSubmit}>Submit</button>
-                  </form>
-          </div>
-      );
-    }
-  } 
   */
-
-
-
-
-
-
 
   const Instructions = () => {
     return (
-      <div className="box">
-        <h1>Instructions</h1>
+      <div className="title">
+        <h2>Instructions</h2>
         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetu</p>
       </div>
     );
@@ -70,19 +38,19 @@ let foodList = [
   
   const FoodContainer = (props) => {
     return (
-      <div className="box light-bg">
+      <div className="info">
         <h3>Add an Item To Your Party!</h3>
         {props.items.map(u => {
           return <FoodCard
                    item={u}
                    handleClick={props.addAsItem}/>
         })}
-        <form className="box content" id="create-course-form" onSubmit={props.handleSubmit}>
+        <form id="create-course-form" onSubmit={props.handleSubmit}>
           <label>
           New Item:
             <input type="text"/>
           </label>
-          <input type="submit" value="Add" />
+          <input class="submit" type="submit" value="Add" />
         </form>
       </div>
     );
@@ -90,7 +58,7 @@ let foodList = [
   
   const PartyContainer = (props) => {
     return (
-      <div className="box light-bg">
+      <div>
         <h3>Your Party Items!!</h3>
         {props.partyItems.map(u => {
             return <FoodCard
@@ -106,17 +74,13 @@ let foodList = [
   
   const FoodCard = (props) => {
     return (
-      <div className="box"
+      <div className="menu" onClick={() => props.handleClick(props.item.id)}
         key={props.item.id}>
-       <div className="content">
-          <ul>
-            <li onClick={() => props.handleClick(props.item.id)}>{props.item.name}</li>
-          {props.PM 
-              ? (<li>servings: {props.item.servings} 
-                <PlusMinus minusServing={props.minusServing} MinusProp={props.item.id} plusServing={props.plusServing} PlusProp={props.item.id}/></li>)
-              : null}
-          </ul>
-        </div>
+        {props.item.name}
+        {props.PM 
+          ? (<li>servings: {props.item.servings} 
+            <PlusMinus minusServing={props.minusServing} MinusProp={props.item.id} plusServing={props.plusServing} PlusProp={props.item.id}/></li>)
+          : null}
       </div>
     )
   };
@@ -190,7 +154,7 @@ const PlusMinus = (props) => {
     
     render() {
       return (
-        <div>
+        <div className="container">
           <Instructions />
           <FoodContainer
             items={this.state.items}
@@ -203,7 +167,7 @@ const PlusMinus = (props) => {
             minusServing = {this.minusServing}>
             <div>123</div>
           </PartyContainer>
-          <button>Submit</button>
+          <button class="submit">Submit</button>
         </div>
       );
     }
