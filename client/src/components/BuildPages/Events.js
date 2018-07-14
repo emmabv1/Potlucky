@@ -2,14 +2,16 @@ import React, {Component} from "react";
 import {NavLink, Redirect} from "react-router-dom";
 import "./potluck.css";
 
+const time = "00:00"
+
 const parties = [
     {
         name: "Movie Night",
-        date: "Tomorrow",
+        date: "Wed, September 16th",
         host: true,
     },
     {
-        name: "Bonfire",
+        name: "Bonfirejfkdlsafjeiwofew",
         date: "Next Week",
         host: false,
     },
@@ -45,6 +47,7 @@ class Event extends Component {
             <div className="details">
             <p>{this.props.name} </p>
             <p>{this.props.date}</p>
+            <p>{time}</p>
             </div>
         </div></NavLink>
         );
@@ -73,6 +76,7 @@ class Events extends Component {
     render(){
       return (
         <div className="container">
+            <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
             <div className="title">
                 <h2>Upcoming Potlucks</h2>
                 <button class="submit" onClick={this.all}>All</button>
