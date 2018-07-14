@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Redirect} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import "./../../App.css";
 
 let foodList = [
@@ -155,6 +155,7 @@ const PlusMinus = (props) => {
     render() {
       return (
         <div className="container">
+          <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
           <Instructions />
           <FoodContainer
             items={this.state.items}

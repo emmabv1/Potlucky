@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Redirect} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import "./potluck.css";
 
 const partyinfo = {
@@ -145,6 +145,7 @@ class Potluck extends Component {
         }
       return (
           <div className="container">
+          <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
               <EventInfo/>
 
               <h2>What are you bringing to the party?</h2>

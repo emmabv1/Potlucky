@@ -48,14 +48,20 @@ class Login extends Component {
           value={this.state.password}
           onChange={this.handleInputChange}
           />
-          <button class="submit" onClick={this.handleFormSubmit}>Submit</button>
+          <div class="submitbox">
+            <button class="submit" onClick={this.handleFormSubmit}>Submit</button>
+          </div>
           <p><NavLink to="">Create Account</NavLink></p>
         </form>
         
 
-        <div class="otherlogins">
+        <div>
           <button class="login" id="facebook" onClick={this.handleFacebookBtn}>Facebook Login</button>
+        </div>
+        <div>
           <button class="login" id="google" onClick={this.handleGoogleBtn}>Google Login</button>
+        </div>
+        <div>
           <button class="login" id="meetup">Meetup Login</button>
         </div>
       </div>
