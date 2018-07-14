@@ -12,6 +12,7 @@ import Potluck from "./components/BuildPages/Potluck";
 import Join from "./components/BuildPages/JoinEvent";
 import View from "./components/View";
 import Error from "./components/Error";
+import NewUser from "./components/newUser";
 
 class App extends Component {
   render() {
@@ -24,6 +25,7 @@ class App extends Component {
         
           <Switch>
             <Route path="/" component={Login} exact />
+            <Route path="/newuser" component={NewUser} />
             <Route path="/home" component={Home} />
             <Route path="/events" component={Events} />
             <Route path="/newevent" component={NewEvent} />

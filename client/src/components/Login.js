@@ -51,7 +51,7 @@ class Login extends Component {
           <div class="submitbox">
             <button class="submit" onClick={this.handleFormSubmit}>Submit</button>
           </div>
-          <p><NavLink to="">Create Account</NavLink></p>
+          <p><NavLink to="/newuser">Create Account</NavLink></p>
         </form>
         
 
