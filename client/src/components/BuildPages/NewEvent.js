@@ -22,47 +22,45 @@ class NewEvent extends Component {
               <h2>Create a new Potluck</h2>
             </div>
                   <form> {/*limit is 23 characters*/}
+                    <div className="submit frame">
                       <p>Party Name</p>
                       <input
                       type="text"
-                      placeholder="Party Name"
                       name="name"
                       />
 
-                      <p>Location</p>
+                      <p>Address</p>
                       <input
                       type="text"
-                      placeholder="Address"
-                      name="location"
+                      name="address"
                       />
 
                       <p>Date</p>
                       <input
-                      type="text"
-                      placeholder="Date"
-                      name="location"
+                      type="date"
+                      name="date"
                       />
 
                       <p>Time</p>
                       <input
-                      type="text"
-                      placeholder="Time"
-                      name="location"
+                      type="time"
+                      name="time"
                       />
 
                       <p>Party Size (optional)</p>
                       <input
-                      type="text"
-                      placeholder="Address"
-                      name="location"
+                      type="number"
+                      name="guest limit"
                       />
 
-                      <p>Image(optional)</p>
-                      <input
-                      type="text"
-                      placeholder="Address"
-                      name="location"
+                      <p>Image (optional)</p>
+                      <input                      
+                      type="file"
+                      name="image"
                       />
+
+                    </div>
+
                       <div>
                       <button class="submit" onClick={this.handleFormSubmit}>Submit</button>
                       </div>

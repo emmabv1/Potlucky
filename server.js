@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 8000;
 const app = express();
 var Strategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-var db = require("./models");
+//var db = require("./models");
 
 // Configure the Facebook strategy for use by Passport.
 //

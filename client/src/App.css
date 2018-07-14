@@ -87,5 +87,12 @@
 
 input {
   border: 1px solid  rgb(180,91,35);
-  margin: 0px, 4px, 0px, 4px;
+}
+
+.frame{
+  width: 90%;
+  border: 2px solid  rgb(180,91,35); 
+  margin: auto;
+  padding-bottom: 20px;
+  margin-bottom: 15px;
 }
