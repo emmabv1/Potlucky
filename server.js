@@ -5,7 +5,7 @@ const passport = require("passport");
 const PORT = process.env.PORT || 8000;
 var Strategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-
+var db = require("./models");
 
 // Configure the Facebook strategy for use by Passport.
 //
@@ -137,7 +137,7 @@ app.get('/profile',
         username: profile.displayName
       }
   
-      users
+      Users
         .findOrCreate({ where: searchConditions, defaults: newUser })
         .spread((user, created) => {
           readings.findAll({ where: { user_id: user.id } })
@@ -146,6 +146,7 @@ app.get('/profile',
               cb(null, logged)
             })
         })
+      return cb(null, profile)
     }))
 
 
@@ -159,5 +160,25 @@ app.get('/auth/google/callback',
     res.redirect('/');
   });
 
-console.log("APP STARTED");
-app.listen(PORT)
+//console.log("APP STARTED");
+//app.listen(PORT)
+
+/*
+//Sequelize DB connection
+var sequelize = new Sequelize(foo, bar, baz);
+sequelize.authenticate().then(function() {
+  console.log('Database connected and authenticated!');
+  return true;
+}).catch(function(err) {
+  console.error('Failed to connect and authenticate', err);
+  return false;
+});
+
+*/
+
+db.sequelize.sync().then(function() {
+  app.listen(PORT, function() {
+    console.log("App listening on PORT " + PORT);
+  });
+});
+
