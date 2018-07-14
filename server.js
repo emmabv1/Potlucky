@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 8000;
 const app = express();
 var Strategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-var db = require("./models");
+//var db = require("./models");
 
 // Configure the Facebook strategy for use by Passport.
 //
@@ -118,46 +118,47 @@ app.get('/profile',
   //Google Authentication 
 
   const GoogleCreds = {
-    clientID: "291603085891-4s8cn8js9dq62v9bodcueo09v2r1kb8h.apps.googleusercontent.com" ,
-    clientSecret: "rcixvYhmBoiq98aBA1S9jGbt",
-    callbackURL: '/auth/google/callback'
+    clientID: "291603085891-hbrfsgkng5vpr0big7i451e477srptbo.apps.googleusercontent.com" ,
+    clientSecret: "vPiuuQ-Y_TD6QQv4ktiwiGKM",
+    callbackURL: 'http://localhost:8000/auth/google/callback'
   }
 
   passport.use(new GoogleStrategy(GoogleCreds,
     (accessToken, refreshToken, profile, cb) => {
-      const searchConditions = {
-        $or: [
+       const searchConditions = {
+         $or: [
           { email: profile.emails[0].value},
           { google_id: profile.id.toString() }
-        ]
-      };
+       ]
+       };
   
-      const newUser = {
-        email: profile.emails[0].value,
-        google_id: profile.id.toString(),
+       const newUser = {
+         email: profile.emails[0].value,
+         google_id: profile.id.toString(),
         username: profile.displayName
-      }
+       }
   
-      users
-        .findOrCreate({ where: searchConditions, defaults: newUser })
-        .spread((user, created) => {
-          readings.findAll({ where: { user_id: user.id } })
-            .then(data => {
-              logged = {user: user, account: data}
-              cb(null, logged)
-            })
-        })
-    }))
+    //   users
+    //     .findOrCreate({ where: searchConditions, defaults: newUser })
+    //     .spread((user, created) => {
+    //       readings.findAll({ where: { user_id: user.id } })
+    //         .then(data => {
+    //           logged = {user: user, account: data}
+    //           cb(null, logged)
+    //         })
+    //     })
+    cb(null,profile)
+     }))
 
 
   app.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile'] }));
+  passport.authenticate('google', { scope: ['profile','email'] }));
 
 app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('https://mighty-citadel-20902.herokuapp.com');
+    res.redirect('/#/home');
   });
 
 console.log("APP STARTED");
