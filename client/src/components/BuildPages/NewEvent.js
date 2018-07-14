@@ -54,11 +54,12 @@ class NewEvent extends Component {
                       />
 
                       <p>Image (optional)</p>
-                      <input                      
-                      type="file"
-                      name="image"
-                      />
-
+                      <label className="upload">Upload Image
+                        <input                     
+                        type="file"
+                        name="image"
+                        />
+                      </label>
                     </div>
 
                       <div>

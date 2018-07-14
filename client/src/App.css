@@ -31,6 +31,7 @@
   border-radius: 8px;
   border-style: none;
   font-size: 18px;
+  font-family: 'Muli', sans-serif;
 }
 
 .menu {
@@ -95,4 +96,24 @@ input {
   margin: auto;
   padding-bottom: 20px;
   margin-bottom: 15px;
+  font-family: 'Sorts Mill Goudy', serif;
+}
+
+.add, label {
+  background: linear-gradient( rgb(196,124,90), rgb(180,91,35));
+  color: white;
+  cursor: pointer;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  padding: 2%;
+  border-radius: 8px;
+  border-style: none;
+  font-size: 16px;
+  font-family: 'Muli', sans-serif;
+}
+
+
+
+input[type="file"] {
+  display: none;
 }
