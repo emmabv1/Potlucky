@@ -119,7 +119,7 @@ app.get('/profile',
   const GoogleCreds = {
     clientID: "291603085891-4s8cn8js9dq62v9bodcueo09v2r1kb8h.apps.googleusercontent.com" ,
     clientSecret: "rcixvYhmBoiq98aBA1S9jGbt",
-    callbackURL: 'http://localhost:8000/login/google/return'
+    callbackURL: '/auth/google/callback'
   }
 
   passport.use(new GoogleStrategy(GoogleCreds,
@@ -156,7 +156,7 @@ app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('https://mighty-citadel-20902.herokuapp.com');
   });
 
 console.log("APP STARTED");
