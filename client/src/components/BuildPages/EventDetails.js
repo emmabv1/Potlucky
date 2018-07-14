@@ -27,63 +27,49 @@ let foodList = [
         }
   */
 
-  const Instructions = () => {
-    return (
-      <div className="title">
-        <h2>Instructions</h2>
-        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetu</p>
-      </div>
-    );
-  };
+const Instructions = () => {
+  return (
+    <div className="title">
+      <h2>Party Items</h2>
+      <p>What kind of items should your guests bring to the potluck? Choose or delete your categories and set the quantity limits for each one.</p>
+    </div>
+  );
+};
   
-  const FoodContainer = (props) => {
-    return (
-      <div className="info">
-        <h3>Add an Item To Your Party!</h3>
-        {props.items.map(u => {
-          return <FoodCard
-                   item={u}
-                   handleClick={props.addAsItem}/>
-        })}
-        <form id="create-course-form" onSubmit={props.handleSubmit}>
-          <label>
-          New Item:
-            <input type="text"/>
-          </label>
-          <input class="submit" type="submit" value="Add" />
-        </form>
-      </div>
-    );
-  };
+const FoodContainer = (props) => {
+  return (
+    <div className="info">
+      <h3>Item Categories</h3>
+      {props.items.map(u => {
+        return <FoodCard
+                  item={u}
+                  handleClick={props.addAsItem}
+                  PM={true}
+                  plusServing={props.plusServing}
+                  minusServing={props.minusServing}/>
+      })}
+      <form id="create-course-form" onSubmit={props.handleSubmit}>
+        <div>
+        New Category: 
+          <input type="text"/>
+        </div>
+        <input className="add" type="submit" value="Add" />
+      </form>
+    </div>
+  );
+};
   
-  const PartyContainer = (props) => {
-    return (
-      <div>
-        <h3>Your Party Items!!</h3>
-        {props.partyItems.map(u => {
-            return <FoodCard
-                     item={u}
-                     handleClick={props.removeAsItem}
-                     PM={true}
-                     plusServing={props.plusServing}
-                     minusServing={props.minusServing}/>
-        })}
-      </div>
-    );
-  };
-  
-  const FoodCard = (props) => {
-    return (
-      <div className="menu" onClick={() => props.handleClick(props.item.id)}
-        key={props.item.id}>
-        {props.item.name}
-        {props.PM 
-          ? (<li>servings: {props.item.servings} 
-            <PlusMinus minusServing={props.minusServing} MinusProp={props.item.id} plusServing={props.plusServing} PlusProp={props.item.id}/></li>)
-          : null}
-      </div>
-    )
-  };
+const FoodCard = (props) => {
+  return (
+    <div className="menu" onClick={() => props.handleClick(props.item.id)}
+      key={props.item.id}>
+      {props.item.name}
+        <li>Quantity: {props.item.servings} 
+          <PlusMinus minusServing={props.minusServing} MinusProp={props.item.id} plusServing={props.plusServing} PlusProp={props.item.id}/>
+        </li>
+    </div>
+  )
+};
   
 const PlusMinus = (props) => {
   return (
@@ -93,86 +79,81 @@ const PlusMinus = (props) => {
     )
 };
 
-  class EventDetails extends React.Component{
-    constructor(props) {
-      super(props);
-      this.state = {
-        items: foodList,
-        partyItems: [2]
-      };
-      
-      this.hydrateUser = this.hydrateUser.bind(this);
-      this.addAsItem = this.addAsItem.bind(this);
-      this.removeAsItem = this.removeAsItem.bind(this);
-      this.plusServing = this.plusServing.bind(this);
-      this.minusServing = this.minusServing.bind(this);
-    }
-  
-
-    hydrateUser(userId) {
-      return this.state.items.find(u => u.id === userId);
-    }
+class EventDetails extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: foodList,
+      partyItems: [2]
+    };
     
-    addAsItem(userId) {
-      this.setState((prevState, props) => {
-        let partyItems = new Set([...prevState.partyItems, userId]);
-        return {partyItems: [...partyItems]};
-      });
-    }
-    
-    removeAsItem(userId) {
-      this.setState((prevState, props) => {
-        let partyItems = this.state.partyItems.filter(id => id !== userId);
-        return {partyItems};
-      });
-    }
-    
-     plusServing(userId) {
-        let copy = this.state.items
-        let index = copy.findIndex( element => element.id === userId);
-        copy[index].servings++;
-        this.setState({items:copy});
-     }
-    
-     minusServing(userId) {
-        let copy = this.state.items
-        let index = copy.findIndex( element => element.id === userId);
-        copy[index].servings--;
-        this.setState({items:copy});
-     }
-
-     handleSubmit = event => {
-      event.preventDefault();
-      const prevState = this.state.items;
-      console.log(event.target[0].value);
-      prevState.push({id: foodList.length+1,
-                      name: event.target[0].value,
-                      servings: 2});
-      this.setState({ items: prevState});
-      document.getElementById("create-course-form").reset();
-    }
-    
-    render() {
-      return (
-        <div className="container">
-          <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
-          <Instructions />
-          <FoodContainer
-            items={this.state.items}
-            addAsItem= {this.addAsItem}
-            handleSubmit= {this.handleSubmit}/>
-          <PartyContainer 
-            partyItems={this.state.partyItems.map(this.hydrateUser)}
-            removeAsItem={this.removeAsItem}
-            plusServing = {this.plusServing}
-            minusServing = {this.minusServing}>
-            <div>123</div>
-          </PartyContainer>
-          <button class="submit">Submit</button>
-        </div>
-      );
-    }
+    this.hydrateUser = this.hydrateUser.bind(this);
+    this.addAsItem = this.addAsItem.bind(this);
+    this.removeAsItem = this.removeAsItem.bind(this);
+    this.plusServing = this.plusServing.bind(this);
+    this.minusServing = this.minusServing.bind(this);
   }
 
 
-  export default EventDetails;
+  hydrateUser(userId) {
+    return this.state.items.find(u => u.id === userId);
+  }
+  
+  addAsItem(userId) {
+    this.setState((prevState, props) => {
+      let partyItems = new Set([...prevState.partyItems, userId]);
+      return {partyItems: [...partyItems]};
+    });
+  }
+  
+  removeAsItem(userId) {
+    this.setState((prevState, props) => {
+      let partyItems = this.state.partyItems.filter(id => id !== userId);
+      return {partyItems};
+    });
+  }
+  
+  plusServing(userId) {
+    let copy = this.state.items
+    let index = copy.findIndex( element => element.id === userId);
+    copy[index].servings++;
+    this.setState({items:copy});
+  }
+  
+  minusServing(userId) {
+    let copy = this.state.items
+    let index = copy.findIndex( element => element.id === userId);
+    copy[index].servings--;
+    this.setState({items:copy});
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+    const prevState = this.state.items;
+    console.log(event.target[0].value);
+    prevState.push({id: foodList.length+1,
+                    name: event.target[0].value,
+                    servings: 2});
+    this.setState({ items: prevState});
+    document.getElementById("create-course-form").reset();
+  }
+  
+  render() {
+    return (
+      <div className="container">
+        <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
+        <Instructions/>
+        <FoodContainer
+          items={this.state.items}
+          addAsItem= {this.addAsItem}
+          handleSubmit= {this.handleSubmit}
+          removeAsItem={this.removeAsItem}
+          plusServing = {this.plusServing}
+          minusServing = {this.minusServing}/>
+        <button class="submit">Submit</button>
+      </div>
+    );
+  }
+}
+
+export default EventDetails;

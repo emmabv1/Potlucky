@@ -44,80 +44,80 @@ class NewEvent extends Component {
             </div>
   
                   <form> {/*limit is 23 characters*/}
+                    <div className="submit frame">
                       <p>Party Name</p>
                       <input
                       type="text"
-                      placeholder="Party Name"
                       name="name"
                       />
 
                       <p>Location</p>
                       <PlacesAutocomplete
-        value={this.state.address}
-        onChange={this.handleChange}
-        onSelect={this.handleSelect}
-      >
-        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div>
-            <input
-              {...getInputProps({
-                placeholder: 'Search Places ...',
-                className: 'location-search-input',
-              })}
-            />
-            <div className="autocomplete-dropdown-container">
-              {loading && <div>Loading...</div>}
-              {suggestions.map(suggestion => {
-                const className = suggestion.active
-                  ? 'suggestion-item--active'
-                  : 'suggestion-item';
-                // inline style for demonstration purpose
-                const style = suggestion.active
-                  ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                return (
-                  <div
-                    {...getSuggestionItemProps(suggestion, {
-                      className,
-                      style,
-                    })}
-                  >
-                    <span>{suggestion.description}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
-      </PlacesAutocomplete>
+                        value={this.state.address}
+                        onChange={this.handleChange}
+                        onSelect={this.handleSelect}
+                      >
+                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                          <div>
+                            <input
+                              {...getInputProps({
+                                placeholder: 'Search Places ...',
+                                className: 'location-search-input',
+                              })}
+                            />
+                            <div className="autocomplete-dropdown-container">
+                              {loading && <div>Loading...</div>}
+                              {suggestions.map(suggestion => {
+                                const className = suggestion.active
+                                  ? 'suggestion-item--active'
+                                  : 'suggestion-item';
+                                // inline style for demonstration purpose
+                                const style = suggestion.active
+                                  ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                return (
+                                  <div
+                                    {...getSuggestionItemProps(suggestion, {
+                                      className,
+                                      style,
+                                    })}
+                                  >
+                                    <span>{suggestion.description}</span>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
+                      </PlacesAutocomplete>
 
                       <p>Date</p>
                       <input
-                      type="text"
-                      placeholder="Date"
-                      name="location"
+                      type="date"
+                      name="date"
                       />
 
                       <p>Time</p>
                       <input
-                      type="text"
-                      placeholder="Time"
-                      name="location"
+                      type="time"
+                      name="time"
                       />
 
                       <p>Party Size (optional)</p>
                       <input
-                      type="text"
-                      placeholder="Address"
-                      name="location"
+                      type="number"
+                      name="guest limit"
                       />
 
-                      <p>Image(optional)</p>
-                      <input
-                      type="text"
-                      placeholder="Address"
-                      name="location"
-                      />
+                      <p>Image (optional)</p>
+                      <label className="upload">Upload Image
+                        <input                     
+                        type="file"
+                        name="image"
+                        />
+                      </label>
+                    </div>
+
                       <div>
                       <button className="submit" onClick={this.handleFormSubmit}>Submit</button>
                       </div>
