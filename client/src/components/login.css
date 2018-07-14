@@ -10,13 +10,12 @@
 }
 
 .login {
-    background-color: rgb(215,164,97);
     color: white;
     cursor: pointer;
     text-align: center;
-    width: 60%;
-    margin: 2%;
-    padding: 2%;
+    margin: 5px;
+    width: 150px;
+    padding: 8px;
     border-radius: 8px;
     border-style: none;
     font-family: 'Muli', sans-serif;
@@ -37,20 +36,9 @@
 
 .events {
     font-size: 30px;
-    background:  rgb(147,39,143);
-    border: none;
+    text-align: center;
     width: 90%;
-    height: 300px;
-    margin: 5%;
-    border-radius: 8px;
-}
-
-.create {
-    font-size: 30px;
-    background:  rgb(147,39,143);
-    border: none;
-    width: 90%;
-    height: 300px;
+    height: 35vh;
     margin: 5%;
     border-radius: 8px;
 }

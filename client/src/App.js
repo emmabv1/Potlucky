@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Route, Switch, NavLink} from "react-router-dom";
+import {HashRouter, Route, Switch, NavLink} from "react-router-dom";
 import "./App.css";
 
 import Login from "./components/Login";
@@ -18,10 +18,10 @@ class App extends Component {
     return (
       <div>
       
-      <BrowserRouter>
+      <HashRouter basename= "/">
       
         <div className="App">
-        <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
+        
           <Switch>
             <Route path="/" component={Login} exact />
             <Route path="/home" component={Home} />
@@ -35,7 +35,7 @@ class App extends Component {
             <Route component={Error} />
           </Switch>
         </div>
-      </BrowserRouter>
+      </HashRouter>
       </div>
     );
   }

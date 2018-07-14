@@ -16,7 +16,7 @@ class InviteGuests extends Component {
           return <Redirect to='/events'/>
         }
       return (
-          <div>
+          <div className="container">
 
               <h2>Potluck Successfully Created!</h2>
               <h2>Invite Your Friends</h2>

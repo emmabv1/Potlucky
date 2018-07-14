@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Redirect} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 
 class NewEvent extends Component {
     state = {
@@ -16,9 +16,12 @@ class NewEvent extends Component {
           return <Redirect to='/details/:id'/>
         }
       return (
-          <div>
-              <h1>Create a new Potluck</h1>
-                  <form>
+          <div className="container">
+          <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
+            <div class="title">
+              <h2>Create a new Potluck</h2>
+            </div>
+                  <form> {/*limit is 23 characters*/}
                       <p>Party Name</p>
                       <input
                       type="text"
@@ -60,8 +63,9 @@ class NewEvent extends Component {
                       placeholder="Address"
                       name="location"
                       />
-
-                      <button onClick={this.handleFormSubmit}>Submit</button>
+                      <div>
+                      <button class="submit" onClick={this.handleFormSubmit}>Submit</button>
+                      </div>
                   </form>
           </div>
       );
