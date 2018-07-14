@@ -16,7 +16,7 @@ class Join extends Component {
         return <Redirect to='/potluck/:id' />
       }
     return (
-        <div>
+        <div className="container">
             <h1> Potlucky! </h1>
             <img id="logo" src= "https://vignette.wikia.nocookie.net/clubpenguin/images/a/a9/Pot_O%27_Gold_clothing_icon_ID_324.png/revision/latest?cb=20130104002816"/>
             

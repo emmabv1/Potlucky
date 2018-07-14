@@ -29,7 +29,7 @@ class Login extends Component {
         return <Redirect to='/home' />
       }
     return (
-      <div>
+      <div className="container">
         <img id="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/>
         <form class="forms">
           <p>Username: {this.state.username}</p>
@@ -48,14 +48,20 @@ class Login extends Component {
           value={this.state.password}
           onChange={this.handleInputChange}
           />
-          <button class="login" onClick={this.handleFormSubmit}>Submit</button>
+          <div class="submitbox">
+            <button class="submit" onClick={this.handleFormSubmit}>Submit</button>
+          </div>
           <p><NavLink to="">Create Account</NavLink></p>
         </form>
         
 
-        <div class="otherlogins">
+        <div>
           <button class="login" id="facebook" onClick={this.handleFacebookBtn}>Facebook Login</button>
+        </div>
+        <div>
           <button class="login" id="google" onClick={this.handleGoogleBtn}>Google Login</button>
+        </div>
+        <div>
           <button class="login" id="meetup">Meetup Login</button>
         </div>
       </div>
