@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Redirect} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 
 class InviteGuests extends Component {
     state = {
@@ -17,30 +17,40 @@ class InviteGuests extends Component {
         }
       return (
           <div className="container">
+            <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
+            <div className="title">
+              <h2>Potluck Created!</h2>
+            </div>
+          
+            <h3>Invite Your Friends</h3>
 
-              <h2>Potluck Successfully Created!</h2>
-              <h2>Invite Your Friends</h2>
+            
 
-                  <form>
-                        <p>Get Shareable Link</p>
-                        <input
-                        type="text"
-                        placeholder="http://shareablelink"
-                        name="link"
-                        />
-                        <button>Copy</button>
+            <form>
+              <div className="info">
+                  <p>Get Shareable Link</p>
+                  <input
+                  type="text"
+                  placeholder="/potluck/:id"
+                  name="link"
+                  />
+                  <button>Copy</button>
 
-                        <h3>Your Contacts</h3>
-                        <ul>
-                            <li>Friend</li>
-                            <li>Friend</li>
-                            <li>Friend</li>
-                            <li>Friend</li>
-                            <li>Friend</li>
-                        </ul>
-
-                      <button onClick={this.handleFormSubmit}>Send Invitations</button>
-                  </form>
+                  <h4>Your Contacts</h4>
+                    <div className="content">
+                      <ul>
+                        <li>Friend</li>
+                        <li>Friend</li>
+                        <li>Friend</li>
+                        <li>Friend</li>
+                        <li>Friend</li>
+                      </ul>
+                    </div>
+              </div>
+              <button className="submit"onClick={this.handleFormSubmit}>Send Invitations</button>
+                
+            </form>
+            
           </div>
       );
     }
