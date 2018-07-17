@@ -10,10 +10,6 @@ module.exports = function(sequelize, DataTypes) {
     });
   
     Host.associate = function(models) {
-      // Associating Host with Posts
-      // When an Host is deleted, also delete any associated Posts
-      // Host.hasMany(models.Items,{
-      //   foreignKey:"itemsId"
       // });
       Host.belongsTo(models.Party,{
         foreignKey:"hostId"

@@ -9,8 +9,6 @@ module.exports = function(sequelize, DataTypes) {
     });
   
     Guests.associate = function(models) {
-      // Associating Guests with Posts
-      // When an Guests is deleted, also delete any associated Posts
 
       Guests.belongsTo(models.Party,{
         foreignKey:"guestId"

@@ -7,14 +7,21 @@ module.exports = function(sequelize, DataTypes) {
       date: DataTypes.DATEONLY,
       time :DataTypes.TIME,
       hostName :DataTypes.STRING,
-      guests: DataTypes.STRING,
+      guest: DataTypes.STRING,
       categoriesOfItems:DataTypes.STRING,
       //guests:{ type : DataTypes.ARRAY(DataTypes.STRING), defaultValue: null},
       //categoriesOfItems:{ type : DataTypes.ARRAY(DataTypes.STRING), defaultValue: null}
     });
   
-   Party.associate = function(models) {
-    
+    Party.associate = function(models) {
+      
+      Party.hasMany(models.Guests,{
+       foreignKey : "guestId"
+      });
+
+      Party.hasOne(models.Host,{
+    foreignKey:"hostId"
+      });
       Party.hasMany(models.Items,{
         foreignKey : "itemsId"
        });

@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
       },
       itemsName: DataTypes.STRING,
       itemQuantity :DataTypes.INTEGER,
-      partyId:DataTypes.INTEGER,
+      //partyId:DataTypes.INTEGER,
       itemCategory:DataTypes.STRING,
       personInCharge:DataTypes.STRING,
     });

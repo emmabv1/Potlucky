@@ -12,7 +12,25 @@ class Login extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     this.setState({tohome: true});
-  };
+
+    //online
+    console.log(data)
+        fetch("/users/new", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        }).then(function(response) {
+            if (response.status >= 400) {
+              throw new Error("Bad response from server");
+            }
+            return response.json();
+        }).then(function(data) {
+            console.log(data)    
+            if(data == "success"){
+               this.setState({msg: "Thanks for registering"});  
+            }
+  }
+};
 
   handleFacebookBtn = event =>{
     event.preventDefault();
