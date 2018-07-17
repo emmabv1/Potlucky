@@ -13,14 +13,6 @@ module.exports = function(sequelize, DataTypes) {
     Party.associate = function(models) {
       // Associating Party with Posts
       // When an Party is deleted, also delete any associated Posts
-      
-      Party.hasMany(models.Guests,{
-       foreignKey : "guestId"
-      });
-
-      Party.hasOne(models.Host,{
-    foreignKey:"hostId"
-      });
       Party.hasMany(models.Items,{
         foreignKey : "itemsId"
        });
