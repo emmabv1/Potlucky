@@ -114,6 +114,7 @@ class NewEvent extends Component {
                         <input                     
                         type="file"
                         name="image"
+                        accept="image/*"
                         />
                       </label>
                     </div>
