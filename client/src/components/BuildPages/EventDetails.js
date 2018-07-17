@@ -43,9 +43,9 @@ const FoodContainer = (props) => {
       {props.items.map(u => {
         return <FoodCard
                   item={u}
-                  handleClick={props.addAsItem}
                   PM={true}
                   plusServing={props.plusServing}
+                  handleClick={props.removeAsItem}
                   minusServing={props.minusServing}/>
       })}
       <form id="create-course-form" onSubmit={props.handleSubmit}>
@@ -61,12 +61,13 @@ const FoodContainer = (props) => {
   
 const FoodCard = (props) => {
   return (
-    <div className="menu" onClick={() => props.handleClick(props.item.id)}
+    <div className="menu"
       key={props.item.id}>
       {props.item.name}
         <li>Quantity: {props.item.servings} 
           <PlusMinus minusServing={props.minusServing} MinusProp={props.item.id} plusServing={props.plusServing} PlusProp={props.item.id}/>
         </li>
+        <button className="clearButton" onClick={() => props.handleClick(props.item.id)}>x</button>
     </div>
   )
 };
@@ -84,44 +85,38 @@ class EventDetails extends React.Component{
     super(props);
     this.state = {
       items: foodList,
-      partyItems: [2]
+      partyItems: foodList
     };
     
-    this.hydrateUser = this.hydrateUser.bind(this);
-    this.addAsItem = this.addAsItem.bind(this);
+    
     this.removeAsItem = this.removeAsItem.bind(this);
     this.plusServing = this.plusServing.bind(this);
     this.minusServing = this.minusServing.bind(this);
   }
-
-
-  hydrateUser(userId) {
-    return this.state.items.find(u => u.id === userId);
-  }
   
-  addAsItem(userId) {
-    this.setState((prevState, props) => {
-      let partyItems = new Set([...prevState.partyItems, userId]);
-      return {partyItems: [...partyItems]};
-    });
-  }
+
   
   removeAsItem(userId) {
-    this.setState((prevState, props) => {
-      let partyItems = this.state.partyItems.filter(id => id !== userId);
-      return {partyItems};
-    });
+   
+    console.log("here");
+    console.log(userId);
+    let filteredList = this.state.partyItems.filter(partyItems => partyItems.id !== userId);
+    //let filteredList = this.state.partyItems.filter(id => id !== userId);
+    this.setState({partyItems: filteredList});
+    console.log(filteredList);
+    
   }
   
   plusServing(userId) {
-    let copy = this.state.items
+    let copy = this.state.partyItems
     let index = copy.findIndex( element => element.id === userId);
     copy[index].servings++;
     this.setState({items:copy});
+    console.log(this.state.partyItems);
   }
   
   minusServing(userId) {
-    let copy = this.state.items
+    let copy = this.state.partyItems
     let index = copy.findIndex( element => element.id === userId);
     copy[index].servings--;
     this.setState({items:copy});
@@ -129,13 +124,14 @@ class EventDetails extends React.Component{
 
   handleSubmit = event => {
     event.preventDefault();
-    const prevState = this.state.items;
+    const prevState = this.state.partyItems;
     console.log(event.target[0].value);
     prevState.push({id: foodList.length+1,
                     name: event.target[0].value,
                     servings: 2});
     this.setState({ items: prevState});
     document.getElementById("create-course-form").reset();
+    
   }
   
   render() {
@@ -144,8 +140,8 @@ class EventDetails extends React.Component{
         <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
         <Instructions/>
         <FoodContainer
-          items={this.state.items}
-          addAsItem= {this.addAsItem}
+          items={this.state.partyItems}
+          
           handleSubmit= {this.handleSubmit}
           removeAsItem={this.removeAsItem}
           plusServing = {this.plusServing}
