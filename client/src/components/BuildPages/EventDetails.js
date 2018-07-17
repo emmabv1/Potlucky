@@ -11,22 +11,6 @@ let foodList = [
   {id: 6, name: 'Miscellaneous', servings: 2}
 ];
 
-/* class EventDetails extends Component {
-    state = {
-      toinvites: false
-    };
-  
-    handleFormSubmit = event => {
-      event.preventDefault();
-      this.setState({toinvites: true});
-    };
-  
-    render() {
-        if (this.state.toinvites === true) {
-          return <Redirect to='/invites/:id'/>
-        }
-  */
-
 const Instructions = () => {
   return (
     <div className="title">
@@ -85,7 +69,8 @@ class EventDetails extends React.Component{
     super(props);
     this.state = {
       items: foodList,
-      partyItems: foodList
+      partyItems: foodList,
+      toinvites: false
     };
     
     
@@ -131,22 +116,28 @@ class EventDetails extends React.Component{
                     servings: 2});
     this.setState({ items: prevState});
     document.getElementById("create-course-form").reset();
-    
   }
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    this.setState({toinvites: true});
+  };
   
   render() {
+    if (this.state.toinvites === true) {
+      return <Redirect to='/invites/:id'/>
+    }
     return (
       <div className="container">
         <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
         <Instructions/>
         <FoodContainer
           items={this.state.partyItems}
-          
           handleSubmit= {this.handleSubmit}
           removeAsItem={this.removeAsItem}
           plusServing = {this.plusServing}
           minusServing = {this.minusServing}/>
-        <button class="submit">Submit</button>
+        <button className="submit" onClick={this.handleFormSubmit}>Submit</button>
       </div>
     );
   }
