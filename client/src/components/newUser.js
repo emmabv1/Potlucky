@@ -8,6 +8,7 @@ class NewUser extends Component {
   
     handleFormSubmit = event => {
       event.preventDefault();
+      
       this.setState({tologin: true});
     };
   
