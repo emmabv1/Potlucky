@@ -9,6 +9,7 @@ module.exports = function(sequelize, DataTypes) {
       hostName :DataTypes.STRING,
       guests: DataTypes.STRING,
       categoriesOfItems:DataTypes.STRING,
+      partyImage : DataTypes.STRING,
       //guests:{ type : DataTypes.ARRAY(DataTypes.STRING), defaultValue: null},
       //categoriesOfItems:{ type : DataTypes.ARRAY(DataTypes.STRING), defaultValue: null}
     });

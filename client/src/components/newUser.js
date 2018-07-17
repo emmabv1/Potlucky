@@ -3,12 +3,39 @@ import {NavLink, Redirect} from "react-router-dom";
 
 class NewUser extends Component {
     state = {
-      tologin: false
-    };
-  
+      tologin: false};
+      
     handleFormSubmit = event => {
+
+      
       event.preventDefault();
-      this.setState({tologin: true});
+
+      var data = {
+        name: this.state.name,
+        email: this.state.email,
+
+    }
+    //       //online
+
+    // fetch("/users/new", {
+    //     method: 'POST',
+    //     headers: {'Content-Type': 'application/json'},
+    //     body: JSON.stringify(data)
+    // }).then(function(response) {
+    //     if (response.status >= 400) {
+    //       throw new Error("Bad response from server");
+    //     }
+    //     return response.json();
+    // }).then(function(data) {
+    //     console.log(data)    
+    //     if(data == "success"){
+    //        this.setState({msg: "Thanks for registering"});  
+    //     }}),
+
+
+
+
+        this.setState({tologin: true});
     };
   
     render() {
