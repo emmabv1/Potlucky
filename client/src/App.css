@@ -112,7 +112,13 @@ input {
   font-family: 'Muli', sans-serif;
 }
 
-
+.content {
+  padding: 10px;
+  overflow: hidden;
+  color: black;
+  background-color: rgb(229,212,211);
+  border-radius: 5px;
+}
 
 input[type="file"] {
   display: none;
