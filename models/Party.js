@@ -1,25 +1,23 @@
 module.exports = function(sequelize, DataTypes) {
     var Party = sequelize.define("Party", {
-      // Giving the Party model a name of type STRING
-      partyId : {type: DataTypes.INTEGER, autoincrement:true,primaryKey: true},
       partyName: DataTypes.STRING,
-      location:  DataTypes.STRING,
+      host: DataTypes.STRING,
+      address: DataTypes.STRING,
       date: DataTypes.DATEONLY,
-      time :DataTypes.TIME,
-      hostName :DataTypes.STRING,
-      guests: DataTypes.STRING,
-      categoriesOfItems:DataTypes.STRING,
-      partyImage : DataTypes.STRING,
-      //guests:{ type : DataTypes.ARRAY(DataTypes.STRING), defaultValue: null},
-      //categoriesOfItems:{ type : DataTypes.ARRAY(DataTypes.STRING), defaultValue: null}
+      time: DataTypes.TIME,
+      limit: DataTypes.INTEGER,
+      image: DataTypes.STRING,
+      guests: DataTypes.STRING, //array
+      itemCategories: DataTypes.STRING //array
     });
   
-   Party.associate = function(models) {
-    
-      Party.hasMany(models.Items,{
-        foreignKey : "itemsId"
-       });
-  };
+  //   Party.associate = function(models) {
+  //     // Associating Party with Posts
+  //     // When an Party is deleted, also delete any associated Posts
+  //     Party.hasMany(models.Items,{
+  //       foreignKey : "itemsId"
+  //      });
+  // };
 
   return Party;
 }

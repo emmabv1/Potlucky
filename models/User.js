@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
       name: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
-      parties: DataTypes.STRING,
+      parties: DataTypes.STRING, //[]
     });
 
   return User;

@@ -73,7 +73,12 @@ class Category extends Component {
     items: food,
     open: false,
     display: {display: "none"},
-    cat: this.props.category
+    cat: this.props.category,
+    itemName: "",
+    itemQuantity: "",
+    partyId: "",
+    category: "",
+    guest: "",
   }
 
   expand = () => {
@@ -83,6 +88,44 @@ class Category extends Component {
         this.setState({open: true, display: {display: "block"}})
       }
     };
+
+    handleInputChange = event => {
+      const { name, value } = event.target;
+      this.setState({
+        [name]: value
+      });
+    };
+
+    handleAdd = event => {
+      event.preventDefault();
+
+      var data = {
+        itemName: this.state.itemName,
+        itemQuantity: this.state.itemQuantity,
+        partyId: this.state.partyId,
+        category: this.state.category,
+        guest: this.state.guest,
+      }
+      console.log(data)
+      fetch("/api/items", {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+      }).then(function(response) {
+          if (response.status >= 400) {
+            throw new Error("Bad response from server");
+          }
+          return response.json();
+      }).then(function(data) {
+          console.log(data)    
+          if(data == "success"){
+            this.setState({msg: "Thanks for registering"});  
+          }
+      }).catch(function(err) {
+          console.log(err)
+      });
+    };
+  
   
   render () {
     return(
@@ -102,9 +145,11 @@ class Category extends Component {
             <input
             type="text"
             placeholder="New Item"
-            name="newitem"
+            name="itemName"
+            value={this.state.itemName}
+            onChange={this.handleInputChange}
             />
-            <button class="submit">Add</button>
+            <button class="submit" onClick={this.handleAdd} formMethod="POST">Add</button>
           </form>
         </div>
                     
@@ -150,15 +195,10 @@ class Potluck extends Component {
 
               <h2>What are you bringing to the party?</h2>
 
-             
-
               {this.state.partyinfo.categories.map((i) => (
                 <Category
                 category={i}/>
               ))}
-
-             
-              
 
               <form>
                   <button className="submit" onClick={this.handleFormSubmit}>Done</button>

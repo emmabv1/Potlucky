@@ -130,7 +130,8 @@ app.get('/profile',
   const GoogleCreds = {
     clientID: "291603085891-hbrfsgkng5vpr0big7i451e477srptbo.apps.googleusercontent.com" ,
     clientSecret: "vPiuuQ-Y_TD6QQv4ktiwiGKM",
-    callbackURL: 'https://secure-wave-40762.herokuapp.com/auth/google/callback'
+    //callbackURL: 'https://secure-wave-40762.herokuapp.com/auth/google/callback'
+    callbackURL: 'http://localhost:8000/auth/google/callback'
   }
 
   passport.use(new GoogleStrategy(GoogleCreds,
@@ -150,7 +151,6 @@ app.get('/profile',
         .spread((user, created) => {
           return cb(null, user)
         })
-      
     }))
 
 
@@ -162,7 +162,7 @@ app.get('/auth/google/callback',
   function(req, res) {
     console.log(req.user);
     // Successful authentication, redirect home.
-    res.redirect('/#/home');
+    res.redirect(`/#/${req.user.id}/home`);
   });
 
 

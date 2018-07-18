@@ -1,4 +1,3 @@
-// Requiring our models
 var db = require("./models");
 var router = require('express').Router();
 
@@ -7,21 +6,55 @@ module.exports = function (app) {
         db.User.findAll().then(function (result) {
            res.json(result);
             console.log("this is a get and it works");
-            //console.log(result.meaning);
+
         });
     });
 
-    app.post('/api/users', function(req, res, next) {
+    app.get("/api/users/:userid/", function (req, res) {
+        db.User.findById(req.params.userid).then(function (result) {
+           res.json(result);
+            console.log("this is a get and it works");
+        });
+    });
+
+    app.post('/api/users/', function(req, res, next) {
         db.User.create(req.body).then(function (result) {
             console.log(req.body);
             res.json(result);
              console.log("this is a post and it works");
-             //console.log(result.meaning);
          });
-        // res.locals.connection.query('insert into members(name,email) values(''+req.body.name+'',''+req.body.email+'')', function (error, results, fields) {
-        //     if(error) throw error;
-        //     res.send(JSON.stringify(results));
-        // });
+    });
+
+    app.get("/api/parties/", function (req, res) {
+        db.Party.findAll().then(function (result) {
+           res.json(result);
+            console.log("this is a get and it works");
+
+        });
+    });
+
+    app.post('/api/party/', function(req, res, next) {
+        db.Party.create(req.body).then(function (result) {
+            console.log(req.body);
+            res.json(result);
+             console.log("this is a post and it works");
+         });
+    });
+
+    app.get("/api/items/", function (req, res) {
+        db.Items.findAll().then(function (result) {
+           res.json(result);
+            console.log("this is a get and it works");
+
+        });
+    });
+
+    app.post('/api/items/', function(req, res, next) {
+        db.Items.create(req.body).then(function (result) {
+            console.log(req.body);
+            res.json(result);
+             console.log("this is a post and it works");
+         });
     });
 
 }

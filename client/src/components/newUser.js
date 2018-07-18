@@ -22,14 +22,6 @@ class NewUser extends Component {
       
       event.preventDefault();
 
-
-      // $.post("/api/friends", userData, function(data){
-      //   console.log (data.name);
-      //   console.log (data.photo);
-      //   $("#guide").html(data.name);
-      //   $("#pic").attr("src", data.photo);
-      // });
-      
       var data = {
         name: this.state.name,
         email: this.state.email,

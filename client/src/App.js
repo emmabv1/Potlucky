@@ -26,8 +26,8 @@ class App extends Component {
           <Switch>
             <Route path="/" component={Login} exact />
             <Route path="/newuser" component={NewUser} />
-            <Route path="/home" component={Home} />
-            <Route path="/events" component={Events} />
+            <Route path="/:userid/home" component={Home} />
+            <Route path="/events" component={Events} /> 
             <Route path="/newevent" component={NewEvent} />
             <Route path="/details/:id" component={EventDetails} />
             <Route path="/invites/:id" component={InviteGuests} />
