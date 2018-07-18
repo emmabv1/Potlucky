@@ -134,6 +134,7 @@ app.get('/profile',
 
   passport.use(new GoogleStrategy(GoogleCreds,
     (accessToken, refreshToken, profile, cb) => {
+      console.log(profile);
        const searchConditions = {
          $or: [
           { email: profile.emails[0].value},
@@ -147,16 +148,12 @@ app.get('/profile',
         username: profile.displayName
        }
   
-      Users
+      db.Users
         .findOrCreate({ where: searchConditions, defaults: newUser })
         .spread((user, created) => {
-          readings.findAll({ where: { user_id: user.id } })
-            .then(data => {
-              logged = {user: user, account: data}
-              cb(null, logged)
-            })
+          return cb(null, user)
         })
-      return cb(null, profile)
+      
     }))
 
 
@@ -166,25 +163,11 @@ app.get('/profile',
 app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
+    console.log(req.user);
     // Successful authentication, redirect home.
     res.redirect('/#/home');
   });
 
-//console.log("APP STARTED");
-//app.listen(PORT)
-
-/*
-//Sequelize DB connection
-var sequelize = new Sequelize(foo, bar, baz);
-sequelize.authenticate().then(function() {
-  console.log('Database connected and authenticated!');
-  return true;
-}).catch(function(err) {
-  console.error('Failed to connect and authenticate', err);
-  return false;
-});
-
-*/
 
 db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
