@@ -12,11 +12,17 @@ import {
 class NewEvent extends Component {
     state = {
       todetails: false,
-      address: ''
+      partyName: "",
+      host: "",
+      address: "",
+      date: "",
+      time: "",
+      limit: "",
+      image: "",
     };
   
     handleChange = address => {
-      this.setState({ address });
+      this.setState({address});
     };
 
     handleSelect = address => {
@@ -27,8 +33,44 @@ class NewEvent extends Component {
         .catch(error => console.error('Error', error));
     };
 
+    handleInputChange = event => {
+      const { name, value } = event.target;
+      this.setState({
+        [name]: value
+      });
+    };
+
     handleFormSubmit = event => {
       event.preventDefault();
+
+      var data = {
+        partyName: this.state.partyName,
+        host: this.state.host,
+        address: this.state.address,
+        date: this.state.date,
+        time: this.state.time,
+        limit: this.state.limit,
+        image: this.state.image,
+      }
+      console.log(data)
+      fetch("/api/parties", {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+      }).then(function(response) {
+          if (response.status >= 400) {
+            throw new Error("Bad response from server");
+          }
+          return response.json();
+      }).then(function(data) {
+          console.log(data)    
+          if(data == "success"){
+            this.setState({msg: "Thanks for registering"});  
+          }
+      }).catch(function(err) {
+          console.log(err)
+      });
+
       this.setState({todetails: true});
     };
   
@@ -48,7 +90,9 @@ class NewEvent extends Component {
                       <p>Party Name</p>
                       <input
                       type="text"
-                      name="name"
+                      name="partyName"
+                      value={this.state.partyName}
+                      onChange={this.handleInputChange}
                       />
 
                       <p>Location</p>
@@ -95,18 +139,24 @@ class NewEvent extends Component {
                       <input
                       type="date"
                       name="date"
+                      value={this.state.date}
+                      onChange={this.handleInputChange}
                       />
 
                       <p>Time</p>
                       <input
                       type="time"
                       name="time"
+                      value={this.state.time}
+                      onChange={this.handleInputChange}
                       />
 
                       <p>Party Size (optional)</p>
                       <input
                       type="number"
-                      name="guest limit"
+                      name="limit"
+                      value={this.state.limit}
+                      onChange={this.handleInputChange}
                       />
 
                       <p>Image (optional)</p>
@@ -115,13 +165,15 @@ class NewEvent extends Component {
                         type="file"
                         name="image"
                         accept="image/*"
+                        value={this.state.image}
+                        onChange={this.handleInputChange}
                         />
                       </label>
                     </div>
 
-                      <div>
-                      <button className="submit" onClick={this.handleFormSubmit}>Submit</button>
-                      </div>
+                    <div>
+                    <button className="submit" onClick={this.handleFormSubmit} formMethod="POST">Submit</button>
+                    </div>
                   </form>
           </div>
       );
