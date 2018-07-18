@@ -149,7 +149,7 @@ app.get('/profile',
         username: profile.displayName
        }
   
-      db.Users
+      db.User
         .findOrCreate({ where: searchConditions, defaults: newUser })
         .spread((user, created) => {
           return cb(null, user)
