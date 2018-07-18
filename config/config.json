@@ -16,8 +16,8 @@
   "production": {
     "username": "root",
     "password": null,
-    "database": "potluckydb",
-    "host": "127.0.0.1",
+    "database": "mcb9cqb63af8iaog",
+    "use_env_variable": "JAWSDB_URL",
     "dialect": "mysql"
   }
 }

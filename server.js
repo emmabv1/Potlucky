@@ -27,7 +27,7 @@ require("./routes.js")(app);
 passport.use(new Strategy({
     clientID:"1702573343197074",
     clientSecret:"addac29a80ac0236f58becb2e13e06f7",
-    callbackURL: 'http://localhost:3000/login/facebook/return'
+    callbackURL: 'http://localhost:8000/login/facebook/return'
   },
   function(accessToken, refreshToken, profile, cb) {
     // In this example, the user's Facebook profile is supplied as the user
@@ -108,12 +108,13 @@ app.get('/login',
   });
 
 app.get('/login/facebook',
-  passport.authenticate('facebook'));
+passport.authenticate('facebook', { scope: ['profile','email'] }));
 
 app.get('/login/facebook/return', 
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
+    // Successful authentication, redirect home.
+    res.redirect('/#/home');
   });
 
 app.get('/profile',
