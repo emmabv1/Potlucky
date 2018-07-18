@@ -108,7 +108,7 @@ app.get('/login',
   });
 
 app.get('/login/facebook',
-passport.authenticate('facebook', { scope: ['profile','email'] }));
+passport.authenticate('facebook'));
 
 app.get('/login/facebook/return', 
   passport.authenticate('facebook', { failureRedirect: '/login' }),
