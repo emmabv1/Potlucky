@@ -10,6 +10,13 @@ module.exports = function (app) {
         });
     });
 
+    app.get("/api/users/:userid/", function (req, res) {
+        db.User.findById(req.params.userid).then(function (result) {
+           res.json(result);
+            console.log("this is a get and it works");
+        });
+    });
+
     app.post('/api/users/', function(req, res, next) {
         db.User.create(req.body).then(function (result) {
             console.log(req.body);

@@ -137,7 +137,7 @@ app.get('/profile',
       console.log(profile);
        const searchConditions = {
     //     $or: [
-          email: profile.emails[0].value,
+          email: profile.emails[0].value
    //       { google_id: profile.id.toString() }
       // ]
        };
@@ -164,7 +164,7 @@ app.get('/auth/google/callback',
   function(req, res) {
     console.log(req.user);
     // Successful authentication, redirect home.
-    res.redirect('/#/home');
+    res.redirect(`/#/${req.user.id}/home`);
   });
 
 
