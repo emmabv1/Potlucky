@@ -1,12 +1,21 @@
 const express = require("express");
 const path = require("path");
 const passport = require("passport");
+const bodyParser = require("body-parser");
 
 const PORT = process.env.PORT || 8000;
 const app = express();
 var Strategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 var db = require("./models");
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.text());
+
+require("./routes.js")(app);
+
+
 
 // Configure the Facebook strategy for use by Passport.
 //
