@@ -136,24 +136,23 @@ app.get('/profile',
     (accessToken, refreshToken, profile, cb) => {
       console.log(profile);
        const searchConditions = {
-         $or: [
-          { email: profile.emails[0].value},
-          { google_id: profile.id.toString() }
-       ]
+    //     $or: [
+          email: profile.emails[0].value,
+   //       { google_id: profile.id.toString() }
+      // ]
        };
   
        const newUser = {
          email: profile.emails[0].value,
-         google_id: profile.id.toString(),
-        username: profile.displayName
+         //google_id: profile.id.toString(),
+          name: profile.displayName
        }
   
-      db.Users
+      db.User
         .findOrCreate({ where: searchConditions, defaults: newUser })
         .spread((user, created) => {
           return cb(null, user)
         })
-      
     }))
 
 
