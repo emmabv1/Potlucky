@@ -3,12 +3,56 @@ import {NavLink, Redirect} from "react-router-dom";
 
 class NewUser extends Component {
     state = {
-      tologin: false
+      tologin: false,
+      name: "",
+      email: "",
+      password: "",
+      confirm: ""
+    };
+
+    handleInputChange = event => {
+      const { name, value } = event.target;
+      this.setState({
+        [name]: value
+      });
     };
   
     handleFormSubmit = event => {
       event.preventDefault();
+
+
+      // $.post("/api/friends", userData, function(data){
+      //   console.log (data.name);
+      //   console.log (data.photo);
+      //   $("#guide").html(data.name);
+      //   $("#pic").attr("src", data.photo);
+      // });
       
+      var data = {
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password
+      }
+      console.log(data)
+      fetch("/api/users", {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+      }).then(function(response) {
+          if (response.status >= 400) {
+            throw new Error("Bad response from server");
+          }
+          return response.json();
+      }).then(function(data) {
+          console.log(data)    
+          if(data == "success"){
+            this.setState({msg: "Thanks for registering"});  
+          }
+      }).catch(function(err) {
+          console.log(err)
+      });
+
+
       this.setState({tologin: true});
     };
   
@@ -24,40 +68,41 @@ class NewUser extends Component {
             </div>
                   <form> {/*limit is 23 characters*/}
                     <div className="submit frame">
-                      <p>First Name</p>
+                      <p>Full Name</p>
                       <input
                       type="text"
                       name="name"
-                      />
-
-                      <p>Last Name</p>
-                      <input
-                      type="text"
-                      name="address"
+                      value={this.state.name}
+                      onChange={this.handleInputChange}
                       />
 
                       <p>Email</p>
                       <input
                       type="email"
                       name="email"
+                      value={this.state.email}
+                      onChange={this.handleInputChange}
                       />
 
-                      <p>Password</p>
+                      <p>Create Password</p>
                       <input
                       type="text"
                       name="password"
+                      value={this.state.password}
+                      onChange={this.handleInputChange}
                       />
 
                       <p>Confirm Password</p>
                       <input
                       type="text"
-                      name="confirm-password"
+                      name="confirm"
+                      value={this.state.confirm}
+                      onChange={this.handleInputChange}
                       />
-
                     </div>
 
                       <div>
-                      <button class="submit" onClick={this.handleFormSubmit}>Submit</button>
+                      <button class="submit" onClick={this.handleFormSubmit} formMethod="POST">Submit</button>
                       </div>
                   </form>
           </div>

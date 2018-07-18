@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/emmabv1/Potlucky#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "concurrently": "^3.6.0",
     "connect-ensure-login": "^0.1.1",
     "cookie-parser": "^1.4.3",
