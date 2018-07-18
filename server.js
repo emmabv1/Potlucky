@@ -27,7 +27,7 @@ require("./routes.js")(app);
 passport.use(new Strategy({
     clientID:"1702573343197074",
     clientSecret:"addac29a80ac0236f58becb2e13e06f7",
-    callbackURL: 'http://localhost:8000/login/facebook/return'
+    callbackURL: 'https://secure-wave-40762.herokuapp.com/login/facebook/return'
   },
   function(accessToken, refreshToken, profile, cb) {
     // In this example, the user's Facebook profile is supplied as the user
@@ -130,7 +130,7 @@ app.get('/profile',
   const GoogleCreds = {
     clientID: "291603085891-hbrfsgkng5vpr0big7i451e477srptbo.apps.googleusercontent.com" ,
     clientSecret: "vPiuuQ-Y_TD6QQv4ktiwiGKM",
-    callbackURL: 'http://localhost:8000/auth/google/callback'
+    callbackURL: 'https://secure-wave-40762.herokuapp.com/auth/google/callback'
   }
 
   passport.use(new GoogleStrategy(GoogleCreds,
