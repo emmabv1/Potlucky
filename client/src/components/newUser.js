@@ -18,6 +18,8 @@ class NewUser extends Component {
     };
   
     handleFormSubmit = event => {
+
+      
       event.preventDefault();
 
       var data = {
