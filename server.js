@@ -137,16 +137,12 @@ app.get('/profile',
     (accessToken, refreshToken, profile, cb) => {
       console.log(profile);
        const searchConditions = {
-         $or: [
-          { email: profile.emails[0].value},
-          { google_id: profile.id.toString() }
-       ]
+          email: profile.emails[0].value
        };
   
        const newUser = {
          email: profile.emails[0].value,
-         google_id: profile.id.toString(),
-        username: profile.displayName
+         name: profile.displayName
        }
   
       db.User
