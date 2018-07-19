@@ -26,7 +26,7 @@ class Login extends Component {
  
   render() {
       if (this.state.tohome === true) {
-        return <Redirect to='/home' />
+        return <Redirect to='/:userid/home' />
       }
     return (
       <div className="container">

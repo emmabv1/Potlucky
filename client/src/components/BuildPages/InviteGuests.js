@@ -13,11 +13,11 @@ class InviteGuests extends Component {
   
     render() {
         if (this.state.toevents === true) {
-          return <Redirect to='/events'/>
+          return <Redirect to='/:userid/events'/>
         }
       return (
           <div className="container">
-            <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
+            <NavLink to="/:userid/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
             <div className="title">
               <h2>Potluck Created!</h2>
             </div>

@@ -14,6 +14,7 @@ class NewEvent extends Component {
     state = {
       todetails: false,
       user: "",
+      party: "",
       partyName: "",
       address: "",
       date: "",
@@ -23,12 +24,18 @@ class NewEvent extends Component {
     };
   
     userqueryid = this.props.match.params.userid;
+    partyqueryid = this.props.match.params.userid;
 
     componentDidMount(){
       axios.get(`/api/users/${this.userqueryid}`)
           .then(res=>this.setState(pvSt=>{
               return {...pvSt,user: res.data}
-          }))
+          }));
+
+      axios.get(`/api/parties/${this.partyqueryid}`)
+          .then(res=>this.setState(pvSt=>{
+              return {...pvSt,party: res.data}
+          }));
   }
   
     handleChange = address => {
@@ -102,11 +109,11 @@ class NewEvent extends Component {
   
     render() {
         if (this.state.todetails === true) {
-          return <Redirect to='/details/:id'/>
+          return <Redirect to='./:eventid/details/'/>
         }
       return (
           <div className="container">
-          <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
+          <NavLink to="./home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
             <div className="title">
               <h2>Create a new Potluck</h2>
             </div>
