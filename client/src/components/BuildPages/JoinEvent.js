@@ -16,6 +16,9 @@ class Join extends Component {
     topotluck: false
   };
 
+  userqueryid = this.props.match.params.userid;
+  partyqueryid = this.props.match.params.eventid;
+
   handleFormSubmit = event => {
     event.preventDefault();
     this.setState({topotluck: true});
@@ -23,7 +26,7 @@ class Join extends Component {
 
   render() {
       if (this.state.topotluck === true) {
-        return <Redirect to='/potluck/:id' />
+        return <Redirect to={"/"+this.userqueryid+"/:eventid"}/>
       }
     return (
         <div className="container">

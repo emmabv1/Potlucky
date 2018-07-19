@@ -10,7 +10,6 @@ import EventDetails from "./components/BuildPages/EventDetails";
 import InviteGuests from "./components/BuildPages/InviteGuests";
 import Potluck from "./components/BuildPages/Potluck";
 import Join from "./components/BuildPages/JoinEvent";
-import View from "./components/View";
 import Error from "./components/Error";
 import NewUser from "./components/newUser";
 
@@ -33,7 +32,6 @@ class App extends Component {
             <Route path="/:userid/:eventid/invites/" component={InviteGuests} />
             <Route path="/:userid/:eventid" component={Potluck} />
             <Route path="/:userid/:eventid/join" component={Join} />
-            <Route path="/view" component={View} />
             <Route component={Error} />
           </Switch>
         </div>

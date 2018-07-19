@@ -130,13 +130,13 @@ class Potluck extends Component {
   
     render() {
       if (this.state.toevents === true) {
-        return <Redirect to='/events'/>
+        return <Redirect to={"/"+this.userqueryid+"/events"}/>
       }
 
       if (this.state.user && this.state.pparty) {
         return (
           <div className="container">
-          <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
+          <NavLink to={"/"+this.userqueryid+"/home"}><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
               <EventInfo
                 info={this.state.pparty}
               />

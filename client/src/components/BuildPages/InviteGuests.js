@@ -5,6 +5,9 @@ class InviteGuests extends Component {
     state = {
       toevents: false
     };
+
+    userqueryid = this.props.match.params.userid;
+    partyqueryid = this.props.match.params.eventid;
   
     handleFormSubmit = event => {
       event.preventDefault();
@@ -13,18 +16,16 @@ class InviteGuests extends Component {
   
     render() {
         if (this.state.toevents === true) {
-          return <Redirect to='/:userid/events'/>
+          return <Redirect to={"/"+this.userqueryid+"/events"}/>
         }
       return (
           <div className="container">
-            <NavLink to="/:userid/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
+            <NavLink to={"/"+this.userqueryid+"/home"}><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
             <div className="title">
               <h2>Potluck Created!</h2>
             </div>
           
             <h3>Invite Your Friends</h3>
-
-            
 
             <form>
               <div className="info">
