@@ -32,11 +32,11 @@ passport.use(new Strategy({
   function(accessToken, refreshToken, profile, cb) {
     console.log(profile);
     const searchConditions = {
-       email: profile.emails[0].value
+       email: profile.username
     };
 
     const newUser = {
-      email: profile.emails[0].value,
+      email: profile.username,
       name: profile.displayName
     }
 
@@ -45,7 +45,6 @@ passport.use(new Strategy({
      .spread((user, created) => {
        return cb(null, user)
      })
-  
     //return cb(null, profile);
   }));
 
