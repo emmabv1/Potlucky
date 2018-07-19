@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {NavLink, Redirect} from "react-router-dom";
 import "./potluck.css";
+import axios from "axios";
 
 const partyinfo = {
   image: "https://upload.wikimedia.org/wikipedia/commons/6/6c/Popcorn_Time_logo.png",

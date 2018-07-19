@@ -33,13 +33,20 @@ module.exports = function (app) {
         });
     });
 
+    app.get("/api/parties/:partyid/", function (req, res) {
+        db.Party.findById(req.params.partyid).then(function (result) {
+           res.json(result);
+            console.log("this is a get and it works");
+        });
+    });
+
     app.post('/api/parties/', function(req, res, next) {
         db.Party.create(req.body)
         .then(function (party) {
             console.log (party.id);
             console.log (party.host);
             db.User.update(
-                {parties: party.id}, 
+                {parties: "[1,2,3,4,5]"}, //pseudocode with dummy data
                 {where: {id: party.host},
             });
           }).then(function (result) {
@@ -61,13 +68,6 @@ module.exports = function (app) {
             res.json(result);
              console.log("this is a post and it works");
          });
-    });
-
-    app.get("/api/parties/:partyid/", function (req, res) {
-        db.Party.findById(req.params.userid).then(function (result) {
-           res.json(result);
-            console.log("this is a get and it works");
-        });
     });
 
 }

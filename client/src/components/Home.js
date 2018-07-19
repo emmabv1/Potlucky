@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {Redirect, NavLink} from "react-router-dom";
+
+
+import {NavLink, Redirect} from "react-router-dom";
 import "./login.css";
 import axios from "axios";
 
@@ -17,6 +19,12 @@ constructor(props){
 
 }
 
+
+    state = {
+        tonewevent: false,
+        user: ""
+    }
+    
     userqueryid = this.props.match.params.userid;
 
     componentDidMount(){
