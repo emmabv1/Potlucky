@@ -114,7 +114,7 @@ app.get('/login/facebook/return',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/#/home');
+    res.redirect(`/#/${req.user.id}/home`);
   });
 
 app.get('/profile',
