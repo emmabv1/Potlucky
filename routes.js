@@ -62,6 +62,13 @@ module.exports = function (app) {
         });
     });
 
+    app.get("/api/items/:partyid/:category", function (req, res) {
+        db.Items.findAll({where: {partyId: req.params.partyid, $and: {category:req.params.category}}}).then(function (result) {
+           res.json(result);
+            console.log("this is a get and it works");
+        });
+    });
+
     app.post('/api/items/', function(req, res, next) {
         db.Items.create(req.body).then(function (result) {
             console.log(req.body);

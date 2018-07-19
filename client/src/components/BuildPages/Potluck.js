@@ -3,65 +3,16 @@ import {NavLink, Redirect} from "react-router-dom";
 import "./potluck.css";
 import axios from "axios";
 
-const partyinfo = {
-  image: "https://upload.wikimedia.org/wikipedia/commons/6/6c/Popcorn_Time_logo.png",
-  name: "Movie Night",
-  location: "My house",
-  date: "Tomorrow",
-  time: "9:00pm",
-  guests: ["k", "l", "m", "n", "o", "p"],
-  categories: ["Entrees", "Desserts", "Disposables", "Beverages", "Salads", "Appetizers"]
-}
-
-const food = [
-  {
-    item:"Cheese Pizza",
-    category: "Entrees",
-    guest: "k"
-  },
-  {
-    item:"Cookies",
-    category: "Desserts",
-    guest: "l"
-  },
-  {
-    item:"Ginger Beer",
-    category: "Beverages",
-    guest: "l"
-  },
-  {
-    item:"Chicken Wings",
-    category: "Entrees",
-    guest: "m"
-  },
-  {
-    item:"Solo Cups",
-    category: "Disposables",
-    guest: "p"
-  },
-  {
-    item:"Celery Sticks",
-    category: "Appetizers",
-    guest: "n"
-  },
-  {
-    item:"Ice Cream",
-    category: "Desserts",
-    guest: "o"
-  }
-]
-
-
 class EventInfo extends Component {
   render(){
     return (
     <div className="title">
-      <img className="photo" src={partyinfo.image}/>
-      <h1>{partyinfo.name}</h1>
+      <img className="photo" src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Popcorn_Time_logo.png"/>
+      <h1>{this.props.info.partyName}</h1>
       <div className="info">
-        <p>{partyinfo.location}</p>
-        <p>{partyinfo.date} at {partyinfo.time}</p>
-        <p>Guest count: {partyinfo.guests.length}</p>
+        <p>{this.props.info.address}</p>
+        <p>{this.props.info.date} at {this.props.info.time}</p>
+        <p>Hosted by: {this.props.info.host}</p>
       </div>
     </div>
     )
@@ -71,114 +22,106 @@ class EventInfo extends Component {
 class Category extends Component {
 
   state = {
-    items: food,
     open: false,
     display: {display: "none"},
-    cat: this.props.category,
-    itemName: "",
-    itemQuantity: "",
-    partyId: "",
-    category: "",
-    guest: "",
+    itemName: ""
+  }
+
+  componentDidMount(){
+    axios.get(`/api/items/${this.props.partyId}/${this.props.category}`)
+      .then(res => this.setState ({items: res.data}))
+      .then(() => console.log(this.state.items));
   }
 
   expand = () => {
-      if(this.state.open) {
-        this.setState({open: false, display: {display: "none"}})
-      }else {
-        this.setState({open: true, display: {display: "block"}})
-      }
-    };
+    if(this.state.open) {
+      this.setState({open: false, display: {display: "none"}})
+    }else {
+      this.setState({open: true, display: {display: "block"}})
+    }
+  };
 
-    handleInputChange = event => {
-      const { name, value } = event.target;
-      this.setState({
-        [name]: value
-      });
-    };
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
 
-    handleAdd = event => {
-      event.preventDefault();
+  handleAdd = event => {
+    event.preventDefault();
 
-      var data = {
-        itemName: this.state.itemName,
-        itemQuantity: this.state.itemQuantity,
-        partyId: this.state.partyId,
-        category: this.state.category,
-        guest: this.state.guest,
-      }
-      console.log(data)
-      fetch("/api/items", {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(data)
-      }).then(function(response) {
-          if (response.status >= 400) {
-            throw new Error("Bad response from server");
-          }
-          return response.json();
-      }).then(function(data) {
-          console.log(data)    
-          if(data == "success"){
-            this.setState({msg: "Thanks for registering"});  
-          }
-      }).catch(function(err) {
-          console.log(err)
-      });
-    };
+    axios.post(`/api/items`, {
+      itemName: this.state.itemName,
+      //itemQuantity: this.state.itemQuantity,
+      partyId: this.props.partyId,
+      category: this.props.category,
+      guest: this.props.guest,})
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+    });
+  };
   
   
   render () {
-    return(
-      <div>
-        <div className="collapsible menu" onClick={this.expand}>{this.state.cat}</div>
-        <div className="content" style={this.state.display}>
+    if (this.state.items){
+      return(
+        <div>
+          <div className="collapsible menu" onClick={this.expand}>{this.props.category}</div>
+          <div className="content" style={this.state.display}>
 
-
-          {this.state.items.filter(j => j.category === this.state.cat).map((i) => (
-            <Item
-              item={i.item}
-              guest={i.guest}
-            />
-          ))}
-            
-          <form>
-            <input
-            type="text"
-            placeholder="New Item"
-            name="itemName"
-            value={this.state.itemName}
-            onChange={this.handleInputChange}
-            />
-            <button class="submit" onClick={this.handleAdd} formMethod="POST">Add</button>
-          </form>
+            {this.state.items.map((i) => (
+              <Item
+                item={i}
+              />
+            ))}
+              
+            <form>
+              <input
+              type="text"
+              placeholder="New Item"
+              name="itemName"
+              value={this.state.itemName}
+              onChange={this.handleInputChange}
+              />
+              <button class="submit" onClick={this.handleAdd} formMethod="POST">Add</button>
+            </form>
+          </div>
         </div>
-                    
-        
-      </div>
-    )
+      )
+    }
+    return(<div></div>)
   }
 }
-
-
 
 class Item extends Component {
   render() {
     return (
       <div className="list">
-        <ul><li>{this.props.item} ({this.props.guest})</li></ul>
+        <ul><li>{this.props.item.itemName} ({this.props.item.guest})</li></ul>
       </div>
     )
   }
 }
 
-
-
 class Potluck extends Component {
     state = {
-      partyinfo: partyinfo,
       toevents: false
     };
+
+    userqueryid = this.props.match.params.userid;
+    partyqueryid = this.props.match.params.eventid;
+
+    componentDidMount(){
+      axios.get(`/api/users/${this.userqueryid}`)
+        .then(res => this.setState ({user: res.data}))
+        .then(() => console.log(this.state.user));
+
+      axios.get(`/api/parties/${this.partyqueryid}`)
+        .then(res => this.setState ({pparty: res.data}))
+        .then(() => console.log(JSON.parse(this.state.pparty.itemCategories)));
+    }
   
     handleFormSubmit = event => {
       event.preventDefault();
@@ -186,26 +129,35 @@ class Potluck extends Component {
     };
   
     render() {
-        if (this.state.toevents === true) {
-          return <Redirect to='/events'/>
-        }
-      return (
+      if (this.state.toevents === true) {
+        return <Redirect to='/events'/>
+      }
+
+      if (this.state.user && this.state.pparty) {
+        return (
           <div className="container">
           <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
-              <EventInfo/>
+              <EventInfo
+                info={this.state.pparty}
+              />
 
               <h2>What are you bringing to the party?</h2>
 
-              {this.state.partyinfo.categories.map((i) => (
+              {JSON.parse(this.state.pparty.itemCategories).map((i) => (
                 <Category
-                category={i}/>
+                  category={i}
+                  partyId={this.state.pparty.id}
+                  guest={this.state.user.id}
+                />
               ))}
 
               <form>
                   <button className="submit" onClick={this.handleFormSubmit}>Done</button>
               </form>
           </div>
-      );
+        );
+      }
+      return(<div></div>)
     }
   }
   
