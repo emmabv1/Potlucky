@@ -23,19 +23,19 @@ class App extends Component {
       
         <div className="App">
         
-          <Switch>
+        <Switch>
             <Route path="/" component={Login} exact />
             <Route path="/newuser" component={NewUser} />
             <Route path="/:userid/home" component={Home} />
             <Route path="/:userid/events" component={Events} /> 
             <Route path="/:userid/newevent" component={NewEvent} />
-            <Route path="/details/:id" component={EventDetails} />
-            <Route path="/invites/:id" component={InviteGuests} />
-            <Route path="/potluck/:id" component={Potluck} />
-            <Route path="/join" component={Join} />
+            <Route path="/:userid/:eventid/details/" component={EventDetails} />
+            <Route path="/:userid/:eventid/invites/" component={InviteGuests} />
+            <Route path="/:userid/:eventid" component={Potluck} />
+            <Route path="/:userid/:eventid/join" component={Join} />
             <Route path="/view" component={View} />
             <Route component={Error} />
-          </Switch>
+        </Switch>
         </div>
       </HashRouter>
       </div>

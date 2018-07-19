@@ -39,6 +39,7 @@
     "passport-google-oauth20": "^1.0.0",
     "path": "^0.12.7",
     "react-places-autocomplete": "^7.2.0",
-    "sequelize": "^4.38.0"
+    "sequelize": "^4.38.0",
+    "yarn": "^1.7.0"
   }
 }

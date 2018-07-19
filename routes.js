@@ -63,6 +63,13 @@ module.exports = function (app) {
          });
     });
 
+    app.get("/api/parties/:partyid/", function (req, res) {
+        db.Party.findById(req.params.userid).then(function (result) {
+           res.json(result);
+            console.log("this is a get and it works");
+        });
+    });
+
 }
 
 

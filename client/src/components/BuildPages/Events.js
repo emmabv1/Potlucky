@@ -43,7 +43,7 @@ const parties = [
 class Event extends Component {
     render() {
         return (
-        <NavLink to="/potluck/:id"><div class="menu">
+        <NavLink to="/:userid/:eventid/details/"><div class="menu">
             <img className="photo" src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Popcorn_Time_logo.png" />
             <div className="details">
             <p>{this.props.name} </p>
@@ -87,7 +87,7 @@ class Events extends Component {
     render(){
       return (
         <div className="container">
-            <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
+            <NavLink to="/:userid/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
             <div className="title">
                 <h2>Upcoming Potlucks</h2>
                 <button class="submit" onClick={this.all}>All</button>

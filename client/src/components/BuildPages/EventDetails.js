@@ -125,11 +125,11 @@ class EventDetails extends React.Component{
   
   render() {
     if (this.state.toinvites === true) {
-      return <Redirect to='/invites/:id'/>
+      return <Redirect to='/:userid/:eventid/invites/'/>
     }
     return (
       <div className="container">
-        <NavLink to="/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
+        <NavLink to="/:userid/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
         <Instructions/>
         <FoodContainer
           items={this.state.partyItems}
