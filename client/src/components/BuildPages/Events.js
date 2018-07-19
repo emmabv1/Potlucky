@@ -95,17 +95,17 @@ class Events extends Component {
                 <button class="submit" onClick={this.theirs}>Theirs</button>
             </div>
 
-            <Event
+            {/*<Event
                 name={this.state.user.parties.name}
                 date={i.date}
-            />
+            />*/}
 
-        {/* {this.state.user.parties.map((i) =>(
+        {this.state.user.parties.map((i) =>(
             <Event
                 name={i.name}
                 date={i.date}
             />
-        ))} */}
+        ))}
         
 
     </div>
