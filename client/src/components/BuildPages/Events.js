@@ -5,7 +5,8 @@ import axios from "axios";
 
 const time = "00:00"
 
-const parties = [
+//replaced by get
+const party = [
     {
         name: "Movie Night",
         date: "Wed, September 16th",
@@ -41,17 +42,30 @@ const parties = [
 
 
 class Event extends Component {
+    state = {
+        
+    }
+
+    componentDidMount(){
+        axios.get(`/api/parties/${this.props.id}`)
+          .then(res => this.setState ({pparty: res.data}))
+          .then(() => console.log(this.state.pparty));
+    }
+
     render() {
+        if (this.state.pparty) {
         return (
         <NavLink to="/:userid/:eventid/details/"><div class="menu">
             <img className="photo" src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Popcorn_Time_logo.png" />
             <div className="details">
-            <p>{this.props.name} </p>
-            <p>{this.props.date}</p>
-            <p>{time}</p>
+            <p>{this.state.pparty.partyName} </p>
+            <p>{this.state.pparty.date}</p>
+            <p>{this.state.pparty.time}</p>
             </div>
         </div></NavLink>
-        );
+        )}
+
+        return(<div></div>)
     }   
 }
 
@@ -59,17 +73,15 @@ class Event extends Component {
 
 class Events extends Component {
     state = {
-        user: "",
-        events: parties,
+        
     }
 
     userqueryid = this.props.match.params.userid;
 
     componentDidMount(){
-      axios.get(`/api/users/${this.userqueryid}`)
-          .then(res=>this.setState(pvSt=>{
-              return {...pvSt,user: res.data}
-          }))
+        axios.get(`/api/users/${this.userqueryid}`)
+          .then(res => this.setState ({user: res.data}))
+          .then(() => console.log(this.state.user));
     }
 
     all = () => {
@@ -85,31 +97,29 @@ class Events extends Component {
     }
 
     render(){
-      return (
-        <div className="container">
-            <NavLink to="/:userid/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
-            <div className="title">
-                <h2>Upcoming Potlucks</h2>
-                <button class="submit" onClick={this.all}>All</button>
-                <button class="submit" onClick={this.yours}>Yours</button>
-                <button class="submit" onClick={this.theirs}>Theirs</button>
-            </div>
-
-            {/*<Event
-                name={this.state.user.parties.name}
-                date={i.date}
-            />*/}
-
-        {this.state.user.parties.map((i) =>(
-            <Event
-                name={i.name}
-                date={i.date}
-            />
-        ))}
+        if (this.state.user) {
+            return (
+                <div className="container">
+                    <NavLink to="/:userid/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
+                    <div className="title">
+                        <h2>Upcoming Potlucks</h2>
+                        <button class="submit" onClick={this.all}>All</button>
+                        <button class="submit" onClick={this.yours}>Yours</button>
+                        <button class="submit" onClick={this.theirs}>Theirs</button>
+                    </div>
         
+                {JSON.parse(this.state.user.parties).map((i) =>(
+                    <Event
+                        id={i}
+                        // date={i.date}
+                    />
+                ))}
+                </div>
+              )
+        }
 
-    </div>
-      )
+        return(<div></div>)
+      
     }
   }
 
