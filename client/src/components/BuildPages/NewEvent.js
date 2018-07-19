@@ -6,20 +6,30 @@ import {
   geocodeByPlaceId,
   getLatLng,
 } from 'react-places-autocomplete';
+import axios from "axios";
 
 
 
 class NewEvent extends Component {
     state = {
       todetails: false,
+      user: "",
       partyName: "",
-      host: "",
       address: "",
       date: "",
       time: "",
       limit: "",
       image: "",
     };
+  
+    userqueryid = this.props.match.params.userid;
+
+    componentDidMount(){
+      axios.get(`/api/users/${this.userqueryid}`)
+          .then(res=>this.setState(pvSt=>{
+              return {...pvSt,user: res.data}
+          }))
+  }
   
     handleChange = address => {
       this.setState({address});
@@ -45,7 +55,7 @@ class NewEvent extends Component {
 
       var data = {
         partyName: this.state.partyName,
-        host: this.state.host,
+        host: this.state.user.id,
         address: this.state.address,
         date: this.state.date,
         time: this.state.time,
@@ -53,23 +63,39 @@ class NewEvent extends Component {
         image: this.state.image,
       }
       console.log(data)
-      fetch("/api/parties", {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(data)
-      }).then(function(response) {
-          if (response.status >= 400) {
-            throw new Error("Bad response from server");
-          }
-          return response.json();
-      }).then(function(data) {
-          console.log(data)    
-          if(data == "success"){
-            this.setState({msg: "Thanks for registering"});  
-          }
-      }).catch(function(err) {
-          console.log(err)
+
+
+      axios.post(`/api/parties`, {
+        partyName: this.state.partyName,
+        host: this.state.user.id,
+        address: this.state.address,
+        date: this.state.date,
+        time: this.state.time,
+        limit: this.state.limit,
+        image: this.state.image,})
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
       });
+
+
+      // fetch("/api/parties", {
+      //     method: 'POST',
+      //     headers: {'Content-Type': 'application/json'},
+      //     body: JSON.stringify(data)
+      // }).then(function(response) {
+      //     if (response.status >= 400) {
+      //       throw new Error("Bad response from server");
+      //     }
+      //     return response.json();
+      // }).then(function(data) {
+      //     console.log(data)    
+      //     if(data == "success"){
+      //       this.setState({msg: "Thanks for registering"});  
+      //     }
+      // }).catch(function(err) {
+      //     console.log(err)
+      // });
 
       this.setState({todetails: true});
     };

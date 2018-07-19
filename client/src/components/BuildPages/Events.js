@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {NavLink, Redirect} from "react-router-dom";
 import "./potluck.css";
+import axios from "axios";
 
 const time = "00:00"
 
@@ -58,19 +59,29 @@ class Event extends Component {
 
 class Events extends Component {
     state = {
-        events: parties
+        user: "",
+        events: parties,
+    }
+
+    userqueryid = this.props.match.params.userid;
+
+    componentDidMount(){
+      axios.get(`/api/users/${this.userqueryid}`)
+          .then(res=>this.setState(pvSt=>{
+              return {...pvSt,user: res.data}
+          }))
     }
 
     all = () => {
-        this.setState({events: parties})
+      //  this.setState({events: parties})
     }
 
     yours = () => {
-        this.setState({events: parties.filter(i => i.host === true)})
+     //   this.setState({events: parties.filter(i => i.host === true)})
     }
 
     theirs = () => {
-        this.setState({events: parties.filter(i => i.host === false)})
+     //   this.setState({events: parties.filter(i => i.host === false)})
     }
 
     render(){
@@ -84,12 +95,17 @@ class Events extends Component {
                 <button class="submit" onClick={this.theirs}>Theirs</button>
             </div>
 
-        {this.state.events.map((i) =>(
+            <Event
+                name={this.state.user.parties.name}
+                date={i.date}
+            />
+
+        {/* {this.state.user.parties.map((i) =>(
             <Event
                 name={i.name}
                 date={i.date}
             />
-        ))}
+        ))} */}
         
 
     </div>
