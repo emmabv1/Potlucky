@@ -27,8 +27,8 @@ class App extends Component {
             <Route path="/" component={Login} exact />
             <Route path="/newuser" component={NewUser} />
             <Route path="/:userid/home" component={Home} />
-            <Route path="/events" component={Events} /> 
-            <Route path="/newevent" component={NewEvent} />
+            <Route path="/:userid/events" component={Events} /> 
+            <Route path="/:userid/newevent" component={NewEvent} />
             <Route path="/details/:id" component={EventDetails} />
             <Route path="/invites/:id" component={InviteGuests} />
             <Route path="/potluck/:id" component={Potluck} />

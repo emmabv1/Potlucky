@@ -27,18 +27,24 @@ module.exports = function (app) {
 
     app.get("/api/parties/", function (req, res) {
         db.Party.findAll().then(function (result) {
-           res.json(result);
+            res.json(result);
             console.log("this is a get and it works");
 
         });
     });
 
-    app.post('/api/party/', function(req, res, next) {
-        db.Party.create(req.body).then(function (result) {
-            console.log(req.body);
-            res.json(result);
-             console.log("this is a post and it works");
-         });
+    app.post('/api/parties/', function(req, res, next) {
+        db.Party.create(req.body)
+        .then(function (party) {
+            console.log (party.id);
+            console.log (party.host);
+            db.User.update(
+                {parties: party.id}, 
+                {where: {id: party.host},
+            });
+          }).then(function (result) {
+             res.json(result);
+        });
     });
 
     app.get("/api/items/", function (req, res) {
