@@ -3,44 +3,6 @@ import {NavLink, Redirect} from "react-router-dom";
 import "./potluck.css";
 import axios from "axios";
 
-const time = "00:00"
-
-//replaced by get
-const party = [
-    {
-        name: "Movie Night",
-        date: "Wed, September 16th",
-        host: true,
-    },
-    {
-        name: "Bonfirejfkdlsafjeiwofew",
-        date: "Next Week",
-        host: false,
-    },
-    {
-        name: "Birthday",
-        date: "In two days",
-        host: false,
-    },
-    {
-        name: "Movie Night",
-        date: "In three weeks",
-        host: false,
-    },
-    {
-        name: "Board Game Day",
-        date: "Wednesday",
-        host: true,
-    },
-    {
-        name: "Orientation",
-        date: "tbd",
-        host: true,
-    },
-]
-
-
-
 class Event extends Component {
     state = {
         
@@ -100,7 +62,7 @@ class Events extends Component {
         if (this.state.user) {
             return (
                 <div className="container">
-                    <NavLink to="/:userid/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
+                    <NavLink to={"/"+this.userqueryid+"/home"}><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
                     <div className="title">
                         <h2>Upcoming Potlucks</h2>
                         <button class="submit" onClick={this.all}>All</button>
@@ -112,7 +74,6 @@ class Events extends Component {
                     <Event
                         id={i}
                         userid={this.state.user.id}
-                        // date={i.date}
                     />
                 ))}
                 </div>
@@ -120,11 +81,7 @@ class Events extends Component {
         }
 
         return(<div></div>)
-      
     }
   }
-
-
-
 
 export default Events;

@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {NavLink, Redirect} from "react-router-dom";
 import "./../../App.css";
+import axios from "axios";
 
 let foodList = [
   {id: 1, name: 'Salad', servings: 2},
@@ -73,13 +74,13 @@ class EventDetails extends React.Component{
       toinvites: false
     };
     
-    
     this.removeAsItem = this.removeAsItem.bind(this);
     this.plusServing = this.plusServing.bind(this);
     this.minusServing = this.minusServing.bind(this);
   }
-  
 
+  userqueryid = this.props.match.params.userid;
+  partyqueryid = this.props.match.params.eventid;
   
   removeAsItem(userId) {
    
@@ -125,11 +126,11 @@ class EventDetails extends React.Component{
   
   render() {
     if (this.state.toinvites === true) {
-      return <Redirect to='/:userid/:eventid/invites/'/>
+      return <Redirect to={"/"+this.userqueryid+"/:eventid/invites"}/>
     }
     return (
       <div className="container">
-        <NavLink to="/:userid/home"><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
+        <NavLink to={"/"+this.userqueryid+"/home"}><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
         <Instructions/>
         <FoodContainer
           items={this.state.partyItems}
