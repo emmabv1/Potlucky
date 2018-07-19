@@ -55,7 +55,7 @@ class Event extends Component {
     render() {
         if (this.state.pparty) {
         return (
-        <NavLink to={"/" + this.props.userid + "/:eventid/"}><div class="menu">
+        <NavLink to={"/" + this.props.userid + "/" + this.state.pparty.id + "/"}><div class="menu">
             <img className="photo" src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Popcorn_Time_logo.png" />
             <div className="details">
             <p>{this.state.pparty.partyName} </p>
