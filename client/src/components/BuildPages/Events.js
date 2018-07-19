@@ -55,7 +55,7 @@ class Event extends Component {
     render() {
         if (this.state.pparty) {
         return (
-        <NavLink to="/:userid/:eventid/details/"><div class="menu">
+        <NavLink to={"/" + this.props.userid + "/:eventid/"}><div class="menu">
             <img className="photo" src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Popcorn_Time_logo.png" />
             <div className="details">
             <p>{this.state.pparty.partyName} </p>
@@ -111,6 +111,7 @@ class Events extends Component {
                 {JSON.parse(this.state.user.parties).map((i) =>(
                     <Event
                         id={i}
+                        userid={this.state.user.id}
                         // date={i.date}
                     />
                 ))}
