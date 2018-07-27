@@ -27,9 +27,13 @@ module.exports = function (app) {
     app.get("/api/parties/", function (req, res) {
         db.Party.findAll().then(function (result) {
             res.json(result);
+
             //console.log("this is a get and it works");
 
         });
+
+             // }).catch(function (err) {res.send(err)});
+
     });
 
     app.get("/api/parties/:partyid/", function (req, res) {
