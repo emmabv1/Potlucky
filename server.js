@@ -15,8 +15,6 @@ app.use(bodyParser.text());
 
 require("./routes.js")(app);
 
-
-
 // Configure the Facebook strategy for use by Passport.
 //
 // OAuth 2.0-based strategies require a `verify` function which receives the
@@ -48,7 +46,6 @@ passport.use(new Strategy({
     //return cb(null, profile);
   }));
 
-
 // Configure Passport authenticated session persistence.
 //
 // In order to restore authentication state across HTTP requests, Passport needs
@@ -66,10 +63,7 @@ passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
 
-
 // Create a new Express application.
-
-
 
 app.use('/static', express.static(path.join(__dirname, 'client/build/static')));
 
@@ -95,18 +89,6 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, 'client/build/index.html'))
 })
 
-
-
-// Define routes.
-
-/*
-app.get('/',
-  function(req, res) {
-    res.render('home', { user: req.user });
-  });
-
-
-  */
 app.get('/api/test', function(req, res) {
   console.log("IN TEST");
 })
@@ -133,39 +115,38 @@ app.get('/profile',
     res.render('profile', { user: req.user });
   });
 
-
-
   //Google Authentication 
 
-  const GoogleCreds = {
-    clientID: "291603085891-hbrfsgkng5vpr0big7i451e477srptbo.apps.googleusercontent.com" ,
-    clientSecret: "vPiuuQ-Y_TD6QQv4ktiwiGKM",
-    callbackURL: 'https://secure-wave-40762.herokuapp.com/auth/google/callback'
-   //callbackURL: 'http://localhost:8000/auth/google/callback'
-  }
+const GoogleCreds = {
+  clientID: "291603085891-hbrfsgkng5vpr0big7i451e477srptbo.apps.googleusercontent.com" ,
+  clientSecret: "vPiuuQ-Y_TD6QQv4ktiwiGKM",
+  //callbackURL: 'https://secure-wave-40762.herokuapp.com/auth/google/callback'
+  callbackURL: 'http://localhost:8000/auth/google/callback'
+}
 
-  passport.use(new GoogleStrategy(GoogleCreds,
-    (accessToken, refreshToken, profile, cb) => {
-      console.log(profile);
-       const searchConditions = {
-          email: profile.emails[0].value
-       };
-  
-       const newUser = {
-         email: profile.emails[0].value,
-         name: profile.displayName
-       }
-  
-      db.User
-        .findOrCreate({ where: searchConditions, defaults: newUser })
-        .spread((user, created) => {
-          return cb(null, user)
-        })
-    }))
+passport.use(new GoogleStrategy(GoogleCreds,
+  (accessToken, refreshToken, profile, cb) => {
+    console.log(profile);
+      const searchConditions = {
+        email: profile.emails[0].value
+      };
+
+      const newUser = {
+        email: profile.emails[0].value,
+        name: profile.displayName
+      }
+
+    db.User
+      .findOrCreate({ where: searchConditions, defaults: newUser })
+      .spread((user, created) => {
+        return cb(null, user)
+      })
+  }))
 
 
-  app.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile','email'] }));
+app.get('/auth/google',
+passport.authenticate('google', { scope: ['profile','email'] }));
+
 
 app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
@@ -175,10 +156,10 @@ app.get('/auth/google/callback',
     res.redirect(`/#/${req.user.id}/home`);
   });
 
+db.sequelize.sync().then(function() {
+//db.sequelize.sync({force:true}).then(function() {
 
-db.sequelize.sync({force:true}).then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
 });
-

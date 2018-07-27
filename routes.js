@@ -5,45 +5,50 @@ module.exports = function (app) {
     app.get("/api/users/", function (req, res) {
         db.User.findAll().then(function (result) {
            res.json(result);
-            console.log("this is a get and it works");
-
+            //console.log("this is a get and it works");
         });
     });
 
     app.get("/api/users/:userid/", function (req, res) {
         db.User.findById(req.params.userid).then(function (result) {
            res.json(result);
-            console.log("this is a get and it works");
+            //console.log("this is a get and it works");
         });
     });
 
     app.post('/api/users/', function(req, res, next) {
         db.User.create(req.body).then(function (result) {
-            console.log(req.body);
+            //console.log(req.body);
             res.json(result);
-             console.log("this is a post and it works");
+            // console.log("this is a post and it works");
          });
     });
 
     app.get("/api/parties/", function (req, res) {
         db.Party.findAll().then(function (result) {
             res.json(result);
-            console.log("this is a get and it works");
-              }).catch(function (err) {res.send(err)});
+
+            //console.log("this is a get and it works");
+
+        });
+
+             // }).catch(function (err) {res.send(err)});
+
     });
 
     app.get("/api/parties/:partyid/", function (req, res) {
         db.Party.findById(req.params.partyid).then(function (result) {
            res.json(result);
-            console.log("this is a get and it works");
+           // console.log("this is a get and it works");
         });
     });
 
     app.post('/api/parties/', function(req, res, next) {
         db.Party.create(req.body)
         .then(function (party) {
+            res.json(party)
             console.log (party.id);
-            console.log (party.host);
+            //console.log (party.host);
             db.User.update(
                 {parties: "[1,2,3,4,5]"}, //pseudocode with dummy data
                 {where: {id: party.host},
@@ -56,7 +61,7 @@ module.exports = function (app) {
     app.get("/api/items/", function (req, res) {
         db.Items.findAll().then(function (result) {
            res.json(result);
-            console.log("this is a get and it works");
+            //console.log("this is a get and it works");
 
         });
     });
@@ -64,15 +69,15 @@ module.exports = function (app) {
     app.get("/api/items/:partyid/:category", function (req, res) {
         db.Items.findAll({where: {partyId: req.params.partyid, $and: {category:req.params.category}}}).then(function (result) {
            res.json(result);
-            console.log("this is a get and it works");
+            //console.log("this is a get and it works");
         });
     });
 
     app.post('/api/items/', function(req, res, next) {
         db.Items.create(req.body).then(function (result) {
-            console.log(req.body);
+            //console.log(req.body);
             res.json(result);
-             console.log("this is a post and it works");
+             //console.log("this is a post and it works");
          });
     });
 

@@ -59,17 +59,14 @@ class NewEvent extends Component {
       image: this.state.image,
       itemCategories: "[\"Entrees\",\"Salad\",\"Beverages\",\"Desserts\",\"Miscellaneous\"]",
     })
-    .then(res => {
-      console.log(res);
-      console.log(res.data);
-    });
-
-    this.setState({todetails: true});
+    .then(res => this.setState ({newparty: res.data}))
+    .then(() => console.log(this.state.newparty))
+    .then(() => this.setState({todetails: true}));
   };
   
   render() {
     if (this.state.todetails === true) {
-      return <Redirect to={"/"+this.userqueryid+"/:eventid/details"}/>
+      return <Redirect to={"/"+this.userqueryid+"/"+this.state.newparty.id+"/details"}/>
     }
 
     if (this.state.user) {
