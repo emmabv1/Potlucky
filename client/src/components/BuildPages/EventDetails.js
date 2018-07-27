@@ -3,6 +3,7 @@ import {NavLink, Redirect} from "react-router-dom";
 import "./../../App.css";
 import axios from "axios";
 
+{/*This is the object that holds the established presets of catergories*/}
 let foodList = [
   {id: 1, name: 'Salad', servings: 2},
   {id: 2, name: 'Entrees', servings: 2},
@@ -12,6 +13,7 @@ let foodList = [
   {id: 6, name: 'Miscellaneous', servings: 2}
 ];
 
+{/*Instructions.... yep thats all that this is*/}
 const Instructions = () => {
   return (
     <div className="title">
@@ -21,10 +23,12 @@ const Instructions = () => {
   );
 };
   
+
 const FoodContainer = (props) => {
   return (
     <div className="info">
       <h3>Item Categories</h3>
+      {/*This Loops through all of the preset items listed in the above object and applies them individually to a FoodCard */}
       {props.items.map(u => {
         return <FoodCard
                   item={u}
@@ -86,14 +90,17 @@ class EventDetails extends React.Component{
    
     console.log("here");
     console.log(userId);
+    {/*This function takes the object of partyIteams and filters out the item that the users does not want anymore*/}
+    {/*This happens by having filteredList = everything in partyItems besides the id of the item that is not wanted*/}
     let filteredList = this.state.partyItems.filter(partyItems => partyItems.id !== userId);
-    //let filteredList = this.state.partyItems.filter(id => id !== userId);
+    {/*The state is then set so that partyItems in now equal to the filteredList*/}
     this.setState({partyItems: filteredList});
     console.log(filteredList);
     
   }
   
   plusServing(userId) {
+    {/*This grabs the id of the item being clicked on and changes the state for its servings*/}
     let copy = this.state.partyItems
     let index = copy.findIndex( element => element.id === userId);
     copy[index].servings++;
@@ -102,6 +109,7 @@ class EventDetails extends React.Component{
   }
   
   minusServing(userId) {
+    {/*This grabs the id of the item being clicked on and changes the state for its servings*/}
     let copy = this.state.partyItems
     let index = copy.findIndex( element => element.id === userId);
     copy[index].servings--;
@@ -109,6 +117,7 @@ class EventDetails extends React.Component{
   }
 
   handleSubmit = event => {
+    {/*This adds an item to the partyItems array from the new item form*/}
     event.preventDefault();
     const prevState = this.state.partyItems;
     console.log(event.target[0].value);
