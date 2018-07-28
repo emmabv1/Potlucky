@@ -2,7 +2,6 @@ const express = require("express");
 const path = require("path");
 const passport = require("passport");
 const bodyParser = require("body-parser");
-const keys = require('./keys');
 
 const PORT = process.env.PORT || 8000;
 const app = express();
@@ -26,8 +25,8 @@ require("./routes.js")(app);
 
 // Edited by Cameron at lines 121-124 for security on 07/28
 passport.use(new Strategy({
-    clientID: keys.facebook.clientID,
-    clientSecret: keys.facebook.clientSecret,
+    clientID: process.env.facebookClientId,
+    clientSecret: process.env.facebookClientSecret,
     // old none secure code: clientID:"1702573343197074",
     // old none secure code: clientSecret:"addac29a80ac0236f58becb2e13e06f7",
     callbackURL: 'https://secure-wave-40762.herokuapp.com/login/facebook/return'
@@ -81,7 +80,7 @@ app.set('view engine', 'ejs');
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: keys.database.secret, resave: true, saveUninitialized: true }));
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
 // Initialize Passport and restore authentication state, if any, from the
 // session.
@@ -123,8 +122,8 @@ app.get('/profile',
   //Google Authentication 
   // Edited by Cameron at lines 121-124 for security on 07/28
 const GoogleCreds = {
-  clientID: keys.google.clientID,
-  clientSecret: keys.google.clientSecret,
+  clientID: process.env.googleClientID,
+  clientSecret: process.env.googleClientSecret,
   // old none secure code: clientID: "291603085891-hbrfsgkng5vpr0big7i451e477srptbo.apps.googleusercontent.com" ,
   // old none secure code: clientSecret: "vPiuuQ-Y_TD6QQv4ktiwiGKM",
   //callbackURL: 'https://secure-wave-40762.herokuapp.com/auth/google/callback'
