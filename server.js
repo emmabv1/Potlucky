@@ -22,9 +22,13 @@ require("./routes.js")(app);
 // behalf, along with the user's profile.  The function must invoke `cb`
 // with a user object, which will be set at `req.user` in route handlers after
 // authentication.
+
+// Edited by Cameron at lines 121-124 for security on 07/28
 passport.use(new Strategy({
-    clientID:"1702573343197074",
-    clientSecret:"addac29a80ac0236f58becb2e13e06f7",
+    clientID: process.env.facebookClientId,
+    clientSecret: process.env.facebookClientSecret,
+    // old none secure code: clientID:"1702573343197074",
+    // old none secure code: clientSecret:"addac29a80ac0236f58becb2e13e06f7",
     callbackURL: 'https://secure-wave-40762.herokuapp.com/login/facebook/return'
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -116,10 +120,12 @@ app.get('/profile',
   });
 
   //Google Authentication 
-
+  // Edited by Cameron at lines 121-124 for security on 07/28
 const GoogleCreds = {
-  clientID: "291603085891-hbrfsgkng5vpr0big7i451e477srptbo.apps.googleusercontent.com" ,
-  clientSecret: "vPiuuQ-Y_TD6QQv4ktiwiGKM",
+  clientID: process.env.googleClientID,
+  clientSecret: process.env.googleClientSecret,
+  // old none secure code: clientID: "291603085891-hbrfsgkng5vpr0big7i451e477srptbo.apps.googleusercontent.com" ,
+  // old none secure code: clientSecret: "vPiuuQ-Y_TD6QQv4ktiwiGKM",
   //callbackURL: 'https://secure-wave-40762.herokuapp.com/auth/google/callback'
   callbackURL: 'http://localhost:8000/auth/google/callback'
 }
