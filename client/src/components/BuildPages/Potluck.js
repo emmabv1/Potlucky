@@ -120,7 +120,7 @@ class Potluck extends Component {
 
       axios.get(`/api/parties/${this.partyqueryid}`)
         .then(res => this.setState ({pparty: res.data}))
-        .then(() => console.log(JSON.parse(this.state.pparty.itemCategories)));
+       // .then(() => console.log(JSON.parse(this.state.pparty.itemCategories)));
     }
   
     handleFormSubmit = event => {
@@ -143,13 +143,13 @@ class Potluck extends Component {
 
               <h2>What are you bringing to the party?</h2>
 
-              {JSON.parse(this.state.pparty.itemCategories).map((i) => (
+              {/*JSON.parse(this.state.pparty.itemCategories).map((i) => (
                 <Category
                   category={i}
                   partyId={this.state.pparty.id}
                   guest={this.state.user.id}
                 />
-              ))}
+              ))*/}
 
               <form>
                   <button className="submit" onClick={this.handleFormSubmit}>Done</button>
