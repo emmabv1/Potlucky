@@ -29,10 +29,9 @@ class App extends Component {
             <Route path="/:userid/home" component={Home} />
             <Route path="/:userid/events" component={Events} /> 
             <Route path="/:userid/newevent" component={NewEvent} />
-            <Route path="/:userid/:eventid" component={Potluck} />
             <Route path="/:userid/:eventid/details/" component={EventDetails} />
             <Route path="/:userid/:eventid/invites/" component={InviteGuests} />
-            
+            <Route path="/:userid/:eventid" component={Potluck} />
             <Route component={Error} />
           </Switch>
         </div>

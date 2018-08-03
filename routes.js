@@ -101,6 +101,13 @@ module.exports = function (app) {
         });
     });
 
+    app.get("/api/items/:partyid", function (req, res) {
+        db.Items.findAll({where: {partyId: req.params.partyid}}).then(function (result) {
+           res.json(result);
+            //console.log("this is a get and it works");
+        });
+    });
+
     app.post('/api/items/', function(req, res, next) {
         db.Items.create(req.body).then(function (result) {
             //console.log(req.body);
@@ -109,20 +116,41 @@ module.exports = function (app) {
          });
     });
 
+    app.get("/api/categories/", function (req, res) {
+        db.Category.findAll().then(function (result) {
+           res.json(result);
+            //console.log("this is a get and it works");
 
-
-
-
-    app.get("/api/join/:user", function (req, res) {
-        db.UserParty.findAll({where: {userId: req.params.user}})
-        .then(function (result) {
-           // res.json(result);
-           let arr = result.map(i => i.partyId);
-           db.Party.findAll({where: {id: [arr]}})
-            //db.Party.findAll({where: {id: [result[0].partyId, result[1].partyId, result[2].partyId]}})
-            .then(function (result) {res.json(result)});
-        })
+        });
     });
+
+    app.get("/api/categories/:partyid", function (req, res) {
+        db.Category.findAll({where: {party: req.params.partyid}}).then(function (result) {
+           res.json(result);
+            //console.log("this is a get and it works");
+        });
+    });
+
+    app.post('/api/categories/', function(req, res, next) {
+        db.Category.create(req.body).then(function (result) {
+            //console.log(req.body);
+            res.json(result);
+             //console.log("this is a post and it works");
+         });
+    });
+
+
+
+    // app.get("/api/join/:user", function (req, res) {
+    //     db.UserParty.findAll({where: {userId: req.params.user}})
+    //     .then(function (result) {
+    //        // res.json(result);
+    //        let arr = result.map(i => i.partyId);
+    //        db.Party.findAll({where: {id: [arr]}})
+    //         //db.Party.findAll({where: {id: [result[0].partyId, result[1].partyId, result[2].partyId]}})
+    //         .then(function (result) {res.json(result)});
+    //     })
+    // });
     
 
 }

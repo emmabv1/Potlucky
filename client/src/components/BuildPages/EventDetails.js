@@ -130,7 +130,19 @@ class EventDetails extends React.Component{
 
   handleFormSubmit = event => {
     event.preventDefault();
-    this.setState({toinvites: true});
+////////////////////
+    this.state.partyItems.forEach((index) => {
+      axios.post(`/api/categories`, {
+        catName: index.name,
+        party: this.partyqueryid,
+        limit: index.servings,})
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
+    });
+//////////////////////////////////
+    //this.setState({toinvites: true});
   };
   
   render() {

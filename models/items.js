@@ -4,7 +4,8 @@ module.exports = function(sequelize, DataTypes) {
       itemQuantity: DataTypes.INTEGER,
       partyId: DataTypes.STRING,
       category: DataTypes.STRING,
-      guest:DataTypes.STRING,
+      guestId: DataTypes.STRING,
+      guestName:DataTypes.STRING,
     });
   
   //   Items.associate = function(models) {
