@@ -51,18 +51,30 @@ class NewEvent extends Component {
 
     axios.post(`/api/parties`, {
       partyName: this.state.partyName,
-      host: this.state.user.id,
+      hostId: this.state.user.id,
+      hostName: this.state.user.name,
       address: this.state.address,
       date: this.state.date,
       time: this.state.time,
       limit: this.state.limit,
       image: this.state.image,
-      itemCategories: "[\"Entrees\",\"Salad\",\"Beverages\",\"Desserts\",\"Miscellaneous\"]",
+     // itemCategories: "[\"Entrees\",\"Salad\",\"Beverages\",\"Desserts\",\"Miscellaneous\"]",
     })
     .then(res => this.setState ({newparty: res.data}))
-    .then(() => console.log(this.state.newparty))
-    .then(() => this.setState({todetails: true}));
-  };
+    .then(() => {
+      let uID = this.state.user.id;
+      console.log(uID);
+      let pID = this.state.newparty.id;
+      console.log(pID);
+
+      // axios.get(`/api/users/${this.userqueryid}`)
+      //   .then(res => this.setState ({user: res.data}))
+      //   .then(() => console.log(this.state.user));
+
+      axios.post(`/api/userparty`, {userId: uID, partyId: pID,})
+        .then(() => this.setState({todetails: true}));
+        //this.setState({todetails: true})});
+  })};
   
   render() {
     if (this.state.todetails === true) {

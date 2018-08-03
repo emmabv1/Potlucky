@@ -25,13 +25,14 @@ class App extends Component {
           <Switch>
             <Route path="/" component={Login} exact />
             <Route path="/newuser" component={NewUser} />
+            <Route path="/join/:eventid/:userid" component={Join} />
             <Route path="/:userid/home" component={Home} />
             <Route path="/:userid/events" component={Events} /> 
             <Route path="/:userid/newevent" component={NewEvent} />
+            <Route path="/:userid/:eventid" component={Potluck} />
             <Route path="/:userid/:eventid/details/" component={EventDetails} />
             <Route path="/:userid/:eventid/invites/" component={InviteGuests} />
-            <Route path="/:userid/:eventid" component={Potluck} />
-            <Route path="/:userid/:eventid/join" component={Join} />
+            
             <Route component={Error} />
           </Switch>
         </div>
