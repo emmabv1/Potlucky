@@ -312,6 +312,7 @@ class NewEvent extends Component {
 
           <p>Image (optional)</p>
               <button onClick={this.openModal}>Open Modal</button>
+              <img className="photo" src={this.state.image}/>
               <Modal
           handleImageSelection={this.handleImageSelection1}
           handleImageSelection={this.handleImageSelection2}

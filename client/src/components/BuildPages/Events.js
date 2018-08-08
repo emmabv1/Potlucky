@@ -3,6 +3,8 @@ import {NavLink, Redirect} from "react-router-dom";
 import "./potluck.css";
 import axios from "axios";
 
+const img = "https://upload.wikimedia.org/wikipedia/commons/6/6c/Popcorn_Time_logo.png";
+
 class Event extends Component {
     state = {
         
@@ -19,7 +21,7 @@ class Event extends Component {
        // if (this.state.pparty) {
         return (
         <NavLink to={"/" + this.props.userid + "/" + this.props.info.id + "/"}><div class="menu">
-            <img className="photo" src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Popcorn_Time_logo.png" />
+            <img className="photo" src={this.props.info.image != ""? this.props.info.image:img}/>
             <div className="details">
             <p>{this.props.info.partyName} </p>
             <p>{this.props.info.date}</p>

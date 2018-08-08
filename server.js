@@ -127,7 +127,7 @@ const GoogleCreds = {
   ///* old none secure code: */ clientID: "291603085891-hbrfsgkng5vpr0big7i451e477srptbo.apps.googleusercontent.com" ,
   ///* old none secure code: */ clientSecret: "vPiuuQ-Y_TD6QQv4ktiwiGKM",
   callbackURL: 'https://secure-wave-40762.herokuapp.com/auth/google/callback'
-  //callbackURL: 'http://localhost:8000/auth/google/callback'
+ // callbackURL: 'http://localhost:8000/auth/google/callback'
 }
 
 passport.use(new GoogleStrategy(GoogleCreds,
@@ -162,8 +162,8 @@ app.get('/auth/google/callback',
     res.redirect(`/#/${req.user.id}/home`);
   });
 
-//db.sequelize.sync().then(function() {
-db.sequelize.sync({force:true}).then(function() {
+db.sequelize.sync().then(function() {
+//db.sequelize.sync({force:true}).then(function() {
 
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);

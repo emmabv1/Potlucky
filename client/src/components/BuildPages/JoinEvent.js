@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {NavLink, Redirect} from "react-router-dom";
 import axios from "axios";
 
+const img = "https://upload.wikimedia.org/wikipedia/commons/6/6c/Popcorn_Time_logo.png";
+
 class Join extends Component {
   state = {
     topotluck: false
@@ -39,7 +41,7 @@ class Join extends Component {
               <h3> {this.state.pparty.hostName} has invited you to join:</h3>
 
               <div className="menu">
-                <img className="photo" src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Popcorn_Time_logo.png" />
+                <img className="photo" src={img}/>
                 <div className="details">
                 <p>{this.state.pparty.partyName} </p>
                 <p>{this.state.pparty.date}</p>

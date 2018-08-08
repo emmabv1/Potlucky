@@ -142,12 +142,12 @@ class EventDetails extends React.Component{
       });
     }, () => {this.setState({toinvites: true});});
 //////////////////////////////////
-    //this.setState({toinvites: true});
+    this.setState({toinvites: true});
   };
   
   render() {
     if (this.state.toinvites === true) {
-      return <Redirect to={"/"+this.userqueryid+"/:eventid/invites"}/>
+      return <Redirect to={"/"+this.userqueryid+"/"+this.partyqueryid+"/invites"}/>
     }
     return (
       <div className="container">
