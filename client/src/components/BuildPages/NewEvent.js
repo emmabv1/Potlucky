@@ -30,6 +30,7 @@ const AvatarContainer = (props) => {
       {props.images.map(u => {
         return <ImageCard
                   image={u}
+                  handleImageSelection={props.handleImageSelection}
                 />
       })}
     </div>
@@ -38,8 +39,8 @@ const AvatarContainer = (props) => {
 
 const ImageCard = (props) => {
   return (
-    <div className="avatarBox">
-      <img className="avatarImg" src={props.image.url} />
+    <div className="avatarBox" onClick={props.handleImageSelection(props.image)}>
+      <input type="image" className="avatarImg" src={props.image.url} onClick={props.handleImageSelection(props.image)} />
     </div>
   )
 };
@@ -60,6 +61,14 @@ class NewEvent extends Component {
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.handleImageSelection1 = this.handleImageSelection1.bind(this);
+    this.handleImageSelection2 = this.handleImageSelection2.bind(this);
+    this.handleImageSelection3 = this.handleImageSelection3.bind(this);
+    this.handleImageSelection4 = this.handleImageSelection4.bind(this);
+    this.handleImageSelection5 = this.handleImageSelection5.bind(this);
+    this.handleImageSelection6 = this.handleImageSelection6.bind(this);
+    this.handleImageSelection7 = this.handleImageSelection7.bind(this);
+    this.handleImageSelection8 = this.handleImageSelection8.bind(this);
   };
 
   images = [
@@ -111,6 +120,69 @@ class NewEvent extends Component {
     this.setState({
       [name]: value
     });
+  };
+
+  handleImageSelection1 = () => {
+    console.log("toast")
+    this.setState({
+      image:"https://cdn.iconscout.com/public/images/icon/free/png-512/campfire-forest-wildlife-outdoor-fire-camping-3ba3ca15ed75d995-512x512.png"
+    });
+  };
+
+  handleImageSelection2 = () => {
+    console.log("toast")
+    this.setState({
+      image:"https://raw.githubusercontent.com/butterproject/artworks/master/Popcorn/Popcorn-Icon/popcorntime-win01.png"
+    });
+    
+  };
+
+  handleImageSelection3 = () => {
+    console.log("toast")
+    this.setState({
+      image:"http://icons.iconarchive.com/icons/google/noto-emoji-activities/1024/52707-party-popper-icon.png"
+    });
+    
+  };
+
+  handleImageSelection4 = () => {
+    console.log("toast")
+    this.setState({
+      image:"https://cdn0.iconfinder.com/data/icons/valentine-s-day-19/64/Wine_glass-01-512.png"
+    });
+    
+  };
+
+  handleImageSelection5 = () => {
+    console.log("toast")
+    this.setState({
+      image:"https://images.vexels.com/media/users/3/135475/isolated/preview/b8f128f69a59a8dcb9119b4c49342061-hervir-el-icono-de-crisol-del-fuego-by-vexels.png"
+    });
+    
+  };
+
+  handleImageSelection6 = () => {
+    console.log("toast")
+    this.setState({
+      image:"http://anditsg.one/img/bbq.png"
+    });
+    
+  };
+
+  handleImageSelection7 = () => {
+    console.log("toast")
+    this.setState({
+      image:"http://icons.iconarchive.com/icons/dapino/beach/256/sun-umbrella-icon.png"
+    });
+    
+  };
+
+  handleImageSelection8 = () => {
+    console.log("toast")
+    this.setState({
+      image:"https://image.ibb.co/eVQ1ae/dice.png"
+    });
+    
   };
 
   handleFormSubmit = event => {
@@ -229,10 +301,24 @@ class NewEvent extends Component {
               value={this.state.limit}
               onChange={this.handleInputChange}
               />
+            </div>
 
-              <p>Image (optional)</p>
+            <div>
+            <button className="submit" onClick={this.handleFormSubmit} formMethod="POST">Submit</button>
+            </div>
+          </form>
+
+          <p>Image (optional)</p>
               <button onClick={this.openModal}>Open Modal</button>
               <Modal
+          handleImageSelection={this.handleImageSelection1}
+          handleImageSelection={this.handleImageSelection2}
+          handleImageSelection={this.handleImageSelection3}
+          handleImageSelection={this.handleImageSelection4}
+          handleImageSelection={this.handleImageSelection5}
+          handleImageSelection={this.handleImageSelection6}
+          handleImageSelection={this.handleImageSelection7}
+          handleImageSelection={this.handleImageSelection8}
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
@@ -242,16 +328,15 @@ class NewEvent extends Component {
  
           <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
           <button onClick={this.closeModal}>close</button>
-          <AvatarContainer 
-            images={this.images}
-          />
+          <input type="image" className="avatarImg" src="https://cdn.iconscout.com/public/images/icon/free/png-512/campfire-forest-wildlife-outdoor-fire-camping-3ba3ca15ed75d995-512x512.png" onClick={this.handleImageSelection1} />
+          <input type="image" className="avatarImg" src="https://raw.githubusercontent.com/butterproject/artworks/master/Popcorn/Popcorn-Icon/popcorntime-win01.png" onClick={this.handleImageSelection2} />
+          <input type="image" className="avatarImg" src="http://icons.iconarchive.com/icons/google/noto-emoji-activities/1024/52707-party-popper-icon.png" onClick={this.handleImageSelection3} />
+          <input type="image" className="avatarImg" src="https://cdn0.iconfinder.com/data/icons/valentine-s-day-19/64/Wine_glass-01-512.png" onClick={this.handleImageSelection4} />
+          <input type="image" className="avatarImg" src="https://images.vexels.com/media/users/3/135475/isolated/preview/b8f128f69a59a8dcb9119b4c49342061-hervir-el-icono-de-crisol-del-fuego-by-vexels.png" onClick={this.handleImageSelection5} />
+          <input type="image" className="avatarImg" src="http://anditsg.one/img/bbq.png" onClick={this.handleImageSelection6} />
+          <input type="image" className="avatarImg" src="http://icons.iconarchive.com/icons/dapino/beach/256/sun-umbrella-icon.png" onClick={this.handleImageSelection7} />
+          <input type="image" className="avatarImg" src="https://image.ibb.co/eVQ1ae/dice.png" onClick={this.handleImageSelection8} />
         </Modal>
-            </div>
-
-            <div>
-            <button className="submit" onClick={this.handleFormSubmit} formMethod="POST">Submit</button>
-            </div>
-          </form>
         </div>
     );
     }
