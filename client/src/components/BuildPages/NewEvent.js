@@ -73,7 +73,8 @@ class NewEvent extends Component {
     {url: "https://image.ibb.co/eVQ1ae/dice.png"}
   ]
 
-  openModal() {
+  openModal(event) {
+    event.preventDefault();
     this.setState({modalIsOpen: true});
   }
  
@@ -82,7 +83,8 @@ class NewEvent extends Component {
     this.subtitle.style.color = '#f00';
   }
  
-  closeModal() {
+  closeModal(event) {
+    event.preventDefault();
     this.setState({modalIsOpen: false});
   }
 
@@ -140,7 +142,7 @@ class NewEvent extends Component {
 
       axios.post(`/api/userparty`, {userId: uID, partyId: pID,})
         .then(() => this.setState({todetails: true}));
-        //this.setState({todetails: true})});
+      //  .this.setState({todetails: true})});
   })};
   
   render() {
