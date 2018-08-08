@@ -16,11 +16,17 @@ class Home extends Component{
           .then(() => console.log(this.state.user));
     }
 
+    handleLogout = event =>{
+        event.preventDefault();
+        document.location.replace("/logout")
+      };
+
     render() {
         if (this.state.user) {
             return (
                 <div className="container">
                     <NavLink to={"/"+this.userqueryid+"/home"}><img className="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/></NavLink>
+                    <button class="logout" onClick={this.handleLogout}>Logout</button>
                     <div className="title">
                         <h2>Hi {this.state.user.name}!</h2>
                     </div>

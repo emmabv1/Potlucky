@@ -1,5 +1,6 @@
 var db = require("./models");
 var router = require('express').Router();
+const passport = require('passport');
 
 module.exports = function (app) {
     app.get("/api/users/", function (req, res) {
@@ -146,6 +147,14 @@ module.exports = function (app) {
             res.json(result);
              //console.log("this is a post and it works");
          });
+    });
+
+    app.get('/logout', (req, res) => {
+        // handle with passport
+        console.log("hi")
+        req.logout();
+        console.log("bye")
+        res.redirect('/');
     });
 
 

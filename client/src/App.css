@@ -123,3 +123,11 @@ input {
 input[type="file"] {
   display: none;
 }
+
+.logout{
+  display: block;
+  color: black;
+  background-color: #d7a360;
+  border: 1px solid #ac48bc00;
+  border-radius: 50%;
+}
