@@ -140,7 +140,7 @@ class EventDetails extends React.Component{
         console.log(res);
         console.log(res.data);
       });
-    });
+    }, () => {this.setState({toinvites: true});});
 //////////////////////////////////
     //this.setState({toinvites: true});
   };
