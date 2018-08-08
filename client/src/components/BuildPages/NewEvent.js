@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import Modal from 'react-modal';
 import {NavLink, Redirect} from "react-router-dom";
 import PlacesAutocomplete from 'react-places-autocomplete';
 import {
@@ -8,17 +9,83 @@ import {
 } from 'react-places-autocomplete';
 import axios from "axios";
 
+Modal.setAppElement('#root')
+
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+
+const AvatarContainer = (props) => {
+  return (
+    <div className="">
+      <h3>Pick Your Image</h3>
+      {/*This Loops through all of the preset items listed in the above object and applies them individually to a FoodCard */}
+      {props.images.map(u => {
+        return <ImageCard
+                  image={u}
+                />
+      })}
+    </div>
+  );
+};
+
+const ImageCard = (props) => {
+  return (
+    <div className="avatarBox">
+      <img className="avatarImg" src={props.image.url} />
+    </div>
+  )
+};
+
 class NewEvent extends Component {
-  state = {
-    todetails: false,
-    partyName: "",
-    address: "",
-    date: "",
-    time: "",
-    limit: "",
-    image: "",
+  constructor(props) {
+    super(props);
+    this.state = {
+      todetails: false,
+      partyName: "",
+      address: "",
+      date: "",
+      time: "",
+      limit: "",
+      image: "",
+      modalIsOpen: false
+    };
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   };
-  
+
+  images = [
+    {url: "https://cdn.iconscout.com/public/images/icon/free/png-512/campfire-forest-wildlife-outdoor-fire-camping-3ba3ca15ed75d995-512x512.png"},
+    {url: "https://raw.githubusercontent.com/butterproject/artworks/master/Popcorn/Popcorn-Icon/popcorntime-win01.png"},
+    {url: "http://icons.iconarchive.com/icons/google/noto-emoji-activities/1024/52707-party-popper-icon.png"},
+    {url: "https://cdn0.iconfinder.com/data/icons/valentine-s-day-19/64/Wine_glass-01-512.png"},
+    {url: "https://images.vexels.com/media/users/3/135475/isolated/preview/b8f128f69a59a8dcb9119b4c49342061-hervir-el-icono-de-crisol-del-fuego-by-vexels.png"},
+    {url: "http://anditsg.one/img/bbq.png"},
+    {url: "http://icons.iconarchive.com/icons/dapino/beach/256/sun-umbrella-icon.png"},
+    {url: "https://image.ibb.co/eVQ1ae/dice.png"}
+  ]
+
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
+ 
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    this.subtitle.style.color = '#f00';
+  }
+ 
+  closeModal() {
+    this.setState({modalIsOpen: false});
+  }
+
   userqueryid = this.props.match.params.userid;
 
   componentDidMount(){
@@ -164,15 +231,21 @@ class NewEvent extends Component {
               />
 
               <p>Image (optional)</p>
-              <label className="upload">Upload Image
-                <input                     
-                type="file"
-                name="image"
-                accept="image/*"
-                value={this.state.image}
-                onChange={this.handleInputChange}
-                />
-              </label>
+              <button onClick={this.openModal}>Open Modal</button>
+              <Modal
+          isOpen={this.state.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+ 
+          <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
+          <button onClick={this.closeModal}>close</button>
+          <AvatarContainer 
+            images={this.images}
+          />
+        </Modal>
             </div>
 
             <div>
