@@ -1,5 +1,6 @@
 var db = require("./models");
 var router = require('express').Router();
+const passport = require('passport');
 
 module.exports = function (app) {
     app.get("/api/users/", function (req, res) {
@@ -15,6 +16,29 @@ module.exports = function (app) {
             //console.log("this is a get and it works");
         });
     });
+
+    // app.get("/api/userparty/:userid/", function (req, res) {
+    //     db.UserParty.findAll({where: {userId: req.params.userid}})
+    //     .then(function (result) {
+    //        res.json(result);
+    //         //console.log("this is a get and it works");
+    //     });
+    // });
+
+    app.get("/api/userparty/:userid", function (req, res) {
+        db.UserParty.findAll({where: {userId: req.params.userid}})
+        .then(function (result) {
+           // res.json(result);
+           let arr = result.map(i => i.partyId);
+           db.Party.findAll({where: {id: [arr]}})
+            //db.Party.findAll({where: {id: [result[0].partyId, result[1].partyId, result[2].partyId]}})
+            .then(function (result) {res.json(result)});
+        })
+    });
+
+   // include: [ { model: PhoneNumber, as: 'phoneNumbers' } ]
+
+    //Cards.findAll({where: {id: arr}, include: [Types, Numbers, Suits]}).then(function(result) 
 
     app.post('/api/users/', function(req, res, next) {
         db.User.create(req.body).then(function (result) {
@@ -43,18 +67,23 @@ module.exports = function (app) {
         });
     });
 
-    app.post('/api/parties/', function(req, res, next) {
+    app.post('/api/parties/', function(req, res) {
         db.Party.create(req.body)
         .then(function (party) {
             res.json(party)
-            console.log (party.id);
-            //console.log (party.host);
-            db.User.update(
-                {parties: "[1,2,3,4,5]"}, //pseudocode with dummy data
-                {where: {id: party.host},
-            });
-          }).then(function (result) {
-             res.json(result);
+          });
+    });
+
+    app.get("/api/userparty/", function (req, res) {
+        db.UserParty.findAll().then(function (result) {
+            res.json(result);
+        });
+    });
+
+    app.post('/api/userparty/', function(req, res) {
+        db.UserParty.create(req.body)
+        .then(function (result) {
+            res.json(result)
         });
     });
 
@@ -73,6 +102,13 @@ module.exports = function (app) {
         });
     });
 
+    app.get("/api/items/:partyid", function (req, res) {
+        db.Items.findAll({where: {partyId: req.params.partyid}}).then(function (result) {
+           res.json(result);
+            //console.log("this is a get and it works");
+        });
+    });
+
     app.post('/api/items/', function(req, res, next) {
         db.Items.create(req.body).then(function (result) {
             //console.log(req.body);
@@ -81,7 +117,63 @@ module.exports = function (app) {
          });
     });
 
+    app.delete('/api/items/:itemid', function(req, res, next) {
+        db.Items.destroy({  
+            where: {id: req.params.itemid}
+          })
+          .then(result => {
+            res.json(result);;
+          });
+    });
+
+    app.get("/api/categories/", function (req, res) {
+        db.Category.findAll().then(function (result) {
+           res.json(result);
+            //console.log("this is a get and it works");
+
+        });
+    });
+
+    app.get("/api/categories/:partyid", function (req, res) {
+        db.Category.findAll({where: {party: req.params.partyid}}).then(function (result) {
+           res.json(result);
+            //console.log("this is a get and it works");
+        });
+    });
+
+    app.post('/api/categories/', function(req, res, next) {
+        db.Category.create(req.body).then(function (result) {
+            //console.log(req.body);
+            res.json(result);
+             //console.log("this is a post and it works");
+         });
+    });
+
+    app.get('/logout', (req, res) => {
+        // handle with passport
+        console.log("hi")
+        req.logout();
+        console.log("bye")
+        res.redirect('/');
+    });
+
+
+
+    // app.get("/api/join/:user", function (req, res) {
+    //     db.UserParty.findAll({where: {userId: req.params.user}})
+    //     .then(function (result) {
+    //        // res.json(result);
+    //        let arr = result.map(i => i.partyId);
+    //        db.Party.findAll({where: {id: [arr]}})
+    //         //db.Party.findAll({where: {id: [result[0].partyId, result[1].partyId, result[2].partyId]}})
+    //         .then(function (result) {res.json(result)});
+    //     })
+    // });
+    
+
 }
+
+
 
 
 
