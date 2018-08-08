@@ -116,6 +116,15 @@ module.exports = function (app) {
          });
     });
 
+    app.delete('/api/items/:itemid', function(req, res, next) {
+        db.Items.destroy({  
+            where: {id: req.params.itemid}
+          })
+          .then(result => {
+            res.json(result);;
+          });
+    });
+
     app.get("/api/categories/", function (req, res) {
         db.Category.findAll().then(function (result) {
            res.json(result);
