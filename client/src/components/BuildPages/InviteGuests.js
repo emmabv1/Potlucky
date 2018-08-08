@@ -8,6 +8,16 @@ class InviteGuests extends Component {
 
     userqueryid = this.props.match.params.userid;
     partyqueryid = this.props.match.params.eventid;
+
+    link = `https://secure-wave-40762.herokuapp.com/#/join/${this.partyqueryid}`;
+
+
+    copyLink = event => {
+      event.preventDefault();
+      let text = document.getElementById("sharelink");
+      text.select();
+      document.execCommand("copy");
+    }
   
     handleFormSubmit = event => {
       event.preventDefault();
@@ -31,24 +41,15 @@ class InviteGuests extends Component {
               <div className="info">
                   <p>Get Shareable Link</p>
                   <input
+                  id="sharelink"
                   type="text"
-                  placeholder="/potluck/:id"
+                  value={this.link}
                   name="link"
                   />
-                  <button>Copy</button>
+                  <button onClick={this.copyLink}>Copy</button>
 
-                  <h4>Your Contacts</h4>
-                    <div className="content">
-                      <ul>
-                        <li>Friend</li>
-                        <li>Friend</li>
-                        <li>Friend</li>
-                        <li>Friend</li>
-                        <li>Friend</li>
-                      </ul>
-                    </div>
               </div>
-              <button className="submit"onClick={this.handleFormSubmit}>Send Invitations</button>
+              <button className="submit"onClick={this.handleFormSubmit}>Done</button>
                 
             </form>
             

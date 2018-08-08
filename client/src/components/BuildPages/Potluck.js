@@ -12,7 +12,7 @@ class EventInfo extends Component {
       <div className="info">
         <p>{this.props.info.address}</p>
         <p>{this.props.info.date} at {this.props.info.time}</p>
-        <p>Hosted by: {this.props.info.host}</p>
+        <p>Hosted by: {this.props.info.hostName}</p>
       </div>
     </div>
     )
@@ -20,7 +20,6 @@ class EventInfo extends Component {
 }
 
 class Category extends Component {
-
   state = {
     open: false,
     display: {display: "none"},
@@ -83,6 +82,7 @@ class Category extends Component {
             {this.state.items.map((i) => (
               <Item
                 item={i}
+                user={this.props.guest}
               />
             ))}
               
@@ -105,12 +105,39 @@ class Category extends Component {
 }
 
 class Item extends Component {
+  state = {
+    display: {display: "none"},
+    itemdisplay: {display: "block"}
+  }
+
+  componentDidMount(){
+    if (this.props.item.guestId == this.props.user.id) {
+      this.setState ({display: {display: "inline-block"}});
+    }
+    // else {
+    //   this.setState ({display: {display: "none"}});
+    // }
+  }
+
+  deleteItem = event => {
+    event.preventDefault();
+
+    axios.delete(`api/items/${this.props.item.id}`)
+      .then(() => this.setState ({itemdisplay: {display: "none"}}));
+  }
+
   render() {
-    return (
-      <div className="list">
-        <ul><li>{this.props.item.itemName} ({this.props.item.guestName})</li></ul>
-      </div>
-    )
+   // if (this.state.display){
+      return (
+        <div className="list" style={this.state.itemdisplay}>
+          <ul style={{display: "inline-block"}}><li>{this.props.item.itemName} ({this.props.item.guestName})</li></ul>
+          <button style={this.state.display} onClick={this.deleteItem}>x</button>
+        </div>
+      )
+   // }
+    
+
+ //   return (<div></div>)
   }
 }
 
