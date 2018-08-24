@@ -31,7 +31,7 @@ class Login extends Component {
     return (
       <div className="container">
         <img id="logo" src="https://image.ibb.co/kn5pgo/potlucky_logo.png" alt="potlucky_logo"/>
-        <form class="forms">
+        {/* <form class="forms">
           <p>Username: {this.state.username}</p>
           <input
           type="text"
@@ -52,7 +52,7 @@ class Login extends Component {
             <button class="submit" onClick={this.handleFormSubmit}>Submit</button>
           </div>
           <p><NavLink to="/newuser">Create Account</NavLink></p>
-        </form>
+        </form> */}
         
 
         <div>
@@ -61,9 +61,9 @@ class Login extends Component {
         <div>
           <button class="login" id="google" onClick={this.handleGoogleBtn}>Google Login</button>
         </div>
-        <div>
+        {/* <div>
           <button class="login" id="meetup">Meetup Login</button>
-        </div>
+        </div> */}
       </div>
     );
   }
